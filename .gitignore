@@ -1,0 +1,12 @@
+# Ignore patterns for Microcebus Generator
+
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+
+# Build Process
+node_modules
