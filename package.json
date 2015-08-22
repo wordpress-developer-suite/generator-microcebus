@@ -2,21 +2,32 @@
   "name": "generator-microcebus",
   "version": "0.1.0",
   "description": "Generate an WordPress project using Ikayzo's opinionated workflow.",
+  "homepage": "https://github.com/micjamking/generator-microcebus",
   "repository": {
     "type": "git",
     "url": "https://github.com/micjamking/generator-microcebus.git"
   },
-  "keywords": [
-    "yeoman-generator"
-  ],
+  "bugs": {
+    "url": "https://github.com/micjamking/generator-microcebus/issues"
+  },
   "author": {
     "name": "Mike King",
     "email": "mike@ikayzo.com",
     "url": "http://ikayzo.com"
   },
+  "files": [
+    "generators"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/micjamking/generator-microcebus/issues"
+  "dependencies": {
+    "yeoman-generator": "^0.19.0",
+    "chalk": "^1.0.0",
+    "yosay": "^1.0.2"
   },
-  "homepage": "https://github.com/micjamking/generator-microcebus"
+  "devDependencies": {
+    "mocha": "*"
+  }
 }

@@ -4,6 +4,12 @@
 
 Maintainer: [Mike King](https://github.com/micjamking)
 
+## Requirements
+This package depends on [WP-CLI](http://wp-cli.org/) which, if not already installed, will be installed up downloading this package. Below are the requirements for WP-CLI
+- UNIX-like environment (OS X, Linux, FreeBSD, Cygwin); limited support in Windows environment
+- PHP 5.3.2 or later
+- WordPress 3.5.2 or later
+
 <!-- ## Getting started
 
 - Install: `npm install -g generator-microcebus`
