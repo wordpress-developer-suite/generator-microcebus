@@ -1,0 +1,54 @@
+# Ignore pattern for <%= appName %>
+
+# Ignore OSX files
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+*.log
+
+# Ignore Node & SCSS build files
+node_modules
+.tmp
+.sass-cache
+
+# Ignore everything in the root except the "wp-content" directory, README & .gitignore.
+/*
+!.gitignore
+!README.md
+!wp-content/
+!Gruntfile.js
+!package.json
+!Gemfile
+!bower.json
+!.bowerrc
+!.jshintrc
+!db/
+db/*
+!db/data.sql
+!plugins
+!scripts/
+
+# Ignore everything in the "wp-content" directory, except the "plugins"
+# and "themes" directories.
+wp-content/*
+!wp-content/plugins/
+!wp-content/themes/
+
+# Ignore everything in the "plugins" directory, except the plugins you
+# specify (see the commented-out examples for hints on how to do this.)
+wp-content/plugins/*
+# !wp-content/plugins/my-single-file-plugin.php
+
+# Ignore everything in the "themes" directory, except the themes you
+# specify (see the commented-out example for a hint on how to do this.)
+wp-content/themes/*
+!wp-content/themes/<%= appSlug %>/
+
+# Ignore everything in the "vendor" directory, except the vendor folders you
+# specify (see the commented-out example for a hint on how to do this.)
+wp-content/themes/<%= appSlug %>/assets/vendor/*
+!wp-content/themes/<%= appSlug %>/assets/vendor/hologram

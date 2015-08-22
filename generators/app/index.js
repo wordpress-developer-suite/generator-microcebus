@@ -1,6 +1,6 @@
 'use strict';
 var chalk  = require('chalk');
-var util   = require("util");
+var util   = require('util');
 var yeoman = require('yeoman-generator');
 var yosay  = require('yosay');
 var github = require('./github');
@@ -53,27 +53,13 @@ Generator.prototype.prompting = function(){
   },
   {
     type: 'input',
-    name: 'author',
-    message: 'Author',
-    default: 'John Doe'
-  },
-  {
-    type: 'input',
-    name: 'authorURI',
-    message: 'Author URI',
-    default: 'http://johndoe.io'
-  },
-  {
-    type: 'input',
-    name: 'description',
+    name: 'themeDesc',
     message: 'Description',
     default: 'A Custom WordPress theme created for X by John Doe'
   }];
 
-  this.prompt(prompts, function (props) {
+  this.prompt(prompts, function(props){
     this.props = props;
-    // To access props later use this.props.someOption;
-
     done();
   }.bind(this));
 };
@@ -82,7 +68,7 @@ Generator.prototype.configuring = function(){
   var done = this.async();
 
   github(
-    this.githubUser,
+    this.props.githubUser,
     function(res){
       this.realname  = res.name;
       this.email     = res.email;
@@ -94,26 +80,44 @@ Generator.prototype.configuring = function(){
 };
 
 Generator.prototype.writing = {
-  app: function(){
+  templates: function(){
+    var userinfo = {
+      appName: this.props.themeName,
+      appSlug: this.props.themeSlug,
+      appDesc: this.props.themeDesc,
+      authorName: this.realname,
+      authorEmail: this.email,
+      authorURL: this.githubUrl
+    };
+
     this.fs.copyTpl(
       this.templatePath('_package.json'),
-      this.destinationPath('package.json'),{
-
-      }
+      this.destinationPath('package.json'),
+      userinfo
     );
     this.fs.copyTpl(
       this.templatePath('_bower.json'),
-      this.destinationPath('bower.json'),{
-        
-      }
+      this.destinationPath('bower.json'),
+      userinfo
     );
-    this.fs.copy(
-      this.templatePath('bowerrc'),
-      this.destinationPath('.bowerrc')
+    this.fs.copyTpl(
+      this.templatePath('_gitignore'),
+      this.destinationPath('.gitignore'),
+      userinfo
+    );
+    this.fs.copyTpl(
+      this.templatePath('_README.md'),
+      this.destinationPath('README.md'),
+      userinfo
+    );
+    this.fs.copyTpl(
+      this.templatePath('_hologram_config.yml'),
+      this.destinationPath('hologram_config.yml'),
+      userinfo
     );
   },
 
-  projectfiles: function () {
+  staticFiles: function () {
     this.fs.copy(
       this.templatePath('editorconfig'),
       this.destinationPath('.editorconfig')
@@ -121,6 +125,18 @@ Generator.prototype.writing = {
     this.fs.copy(
       this.templatePath('jshintrc'),
       this.destinationPath('.jshintrc')
+    );
+    this.fs.copy(
+      this.templatePath('bowerrc'),
+      this.destinationPath('.bowerrc')
+    );
+    this.fs.copy(
+      this.templatePath('Gemfile'),
+      this.destinationPath('Gemfile')
+    );
+    this.fs.copy(
+      this.templatePath('plugins'),
+      this.destinationPath('plugins')
     );
   }
 };
