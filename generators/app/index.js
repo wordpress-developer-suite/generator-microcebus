@@ -257,5 +257,5 @@ Generator.prototype.install = function(){
 
   }).bind(this));
 
-  //this.installDependencies();
+  this.installDependencies();
 };
