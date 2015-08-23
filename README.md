@@ -14,6 +14,7 @@ This package depends on [WP-CLI](http://wp-cli.org/) which, if not already insta
 
 - Install: `npm install -g generator-microcebus`
 - Run: `yo microcebus`
+- Run: `bundle` or `gem install hologram` _(if you don't have bundler installed.)_
 
 _(Make sure MySQL is started and the database username and database password already exist.)_
 
