@@ -19,8 +19,6 @@
   },
   "scripts": {
     "test": "mocha --reporter spec",
-    "preversion": "npm test",
-    "version": "echo 'Wow!'",
     "postversion": "git push && git push --tags"
   },
   "files": [
