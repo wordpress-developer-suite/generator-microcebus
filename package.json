@@ -19,7 +19,12 @@
     "generators"
   ],
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator",
+    "web",
+    "app",
+    "WordPress",
+    "Foundation",
+    "grunt"
   ],
   "license": "MIT",
   "dependencies": {
