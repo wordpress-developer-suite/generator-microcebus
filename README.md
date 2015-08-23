@@ -58,7 +58,7 @@ $ bundle
 _*Or `gem install hologram` (if you don't have bundler installed.)_
 
 ## Note
-Only tested on OSX 10.10.4
+Only tested on OSX
 
 ## License
 
