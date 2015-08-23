@@ -172,7 +172,7 @@ Generator.prototype.install = function(){
     dbuser: this.props.dbUser
   };
 
-  if (this.props.dbPass.length > 0) {
+  if (this.props.dbPass && this.props.dbPass.length > 0) {
     config.dbpass = this.props.dbPass;
   }
 
@@ -267,8 +267,23 @@ Generator.prototype.install = function(){
 
 Generator.prototype.end = {
   foundationSettings: function(){
-    var assets = 'wp-content/themes/' + this.props.themeSlug + '/assets';
-    fs.createReadStream(assets + '/vendor/foundation/scss/foundation/_settings.scss')
-      .pipe(fs.createWriteStream(assets + '/scss/_settings.scss'));
+    var assets    = 'wp-content/themes/' + this.props.themeSlug + '/assets';
+
+    // Confirm directory exists
+    try {
+      var directory = fs.lstatSync(assets);
+
+      if (directory.isDirectory()) {
+        fs.createReadStream(assets + '/vendor/foundation/scss/foundation/_settings.scss')
+          .pipe(fs.createWriteStream(assets + '/scss/_settings.scss'));
+        this.log('Copy foundation override settings to `assets/scss...`');
+      }
+    }
+    catch (e) {
+        this.log(e);
+    }
+  },
+  complete: function(){
+    this.log('Done! Happy coding...');
   }
 };

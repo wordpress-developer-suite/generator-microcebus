@@ -7,17 +7,22 @@ var helpers = require('yeoman-generator').test;
 describe('microcebus:app', function () {
   before(function (done) {
     helpers.run(path.join(__dirname, '../app'))
-      .withOptions({ skipInstall: true })
-      .withPrompts({ someOption: true })
       .on('end', done);
   });
 
-  it('creates files', function () {
+  it('creates expected files', function () {
     assert.file([
       'bower.json',
+      '.bowerrc',
+      '.gitignore',
+      'Gruntfile.js',
+      'hologram_config.yml',
       'package.json',
+      'README.md',
       '.editorconfig',
-      '.jshintrc'
+      'Gemfile',
+      '.jshintrc',
+      'plugins'
     ]);
   });
 });
