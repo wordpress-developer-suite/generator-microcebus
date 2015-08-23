@@ -10,51 +10,84 @@ This package depends on [WP-CLI](http://wp-cli.org/) which, if not already insta
 - PHP 5.3.2 or later
 - WordPress 3.5.2 or later
 
-<!-- ## Getting started
+## Getting started
 
 - Install: `npm install -g generator-microcebus`
 - Run: `yo microcebus`
 
-## Commands
-
-* `yo generator` shows a wizard for generating a new generator
-* `yo generator:subgenerator NAME` generates a subgenerator with the name NAME
-
+_(Make sure MySQL is started and the database username and database password already exist.)_
 
 ## What do you get?
 
 Scaffolds out a complete project directory structure for you:
 
     .
-    ├── generators
-    │   └── app
-    │       ├── index.js
-    │       └── templates
-    │           ├── _bower.json
-    │           ├── _package.json
-    │           ├── editorconfig
-    │           └── jshintrc
+    ├── wp-admin
+    ├── wp-content
+    │   ├── plugins
+    │   └── themes
+    │       └── microcebus
+    │           ├── assets
+    │           ├── languages
+    │           ├── layouts
+    │           ├── lib
+    │           ├── templates
+    │           ├── 404.php
+    │           ├── archive.php
+    │           ├── codesniffer.ruleset.xml
+    │           ├── comments.php
+    │           ├── CONTRIBUTING.md
+    │           ├── footer.php
+    │           ├── functions.php
+    │           ├── header.php
+    │           ├── index.php
+    │           ├── page.php
+    │           ├── README.md
+    │           ├── rtl.css
+    │           ├── screenshot.png
+    │           ├── search.php
+    │           ├── sidebar.php
+    │           ├── single.php
+    │           └── style.css
+    ├── wp-includes
+    ├── .bowerrc
     ├── .editorconfig
-    ├── .gitattributes
     ├── .gitignore
     ├── .jshintrc
-    ├── .travis.yml
-    ├── .yo-rc.json
+    ├── bower.json
+    ├── Gemfile
+    ├── hologram_config.yml
+    ├── index.php
+    ├── license.txt
     ├── package.json
+    ├── plugins
+    ├── readme.html
     ├── README.md
-    └── test
-        └── test-app.js
+    ├── wp-activate.php
+    ├── wp-blog-header.php
+    ├── wp-comments-post.php
+    ├── wp-config-sample.php
+    ├── wp-config.php
+    ├── wp-cron.php
+    ├── wp-links-opml.php
+    ├── wp-load.php
+    ├── wp-login.php
+    ├── wp-mail.php
+    ├── wp-settings.php
+    ├── wp-signup.php
+    ├── wp-trackback.php
+    └── xmlrpc.php
 
 
-## Contributing
+<!-- ## Contributing
 
 See the [contribution docs](https://github.com/yeoman/yeoman/blob/master/contributing.md).
 
 When submitting an issue, please follow [the
 guidelines](https://github.com/yeoman/yeoman/blob/master/contributing.md#issue-submission).
 Especially important is to make sure Yeoman is up-to-date, and providing the
-command or commands that cause the issue.
- -->
+command or commands that cause the issue. -->
+
 
 ## License
 
