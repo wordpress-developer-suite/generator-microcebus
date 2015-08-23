@@ -66,6 +66,9 @@ guidelines](https://github.com/yeoman/yeoman/blob/master/contributing.md#issue-s
 Especially important is to make sure Yeoman is up-to-date, and providing the
 command or commands that cause the issue. -->
 
+## Note
+Only tested on OSX 10.10.4
+
 ## License
 
 MIT © Mike King [mike@ikayzo.com](mailto:mike@ikayzo.com)
