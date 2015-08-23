@@ -177,10 +177,10 @@ Generator.prototype.install = function(){
   }
 
   var downloadTheme = (function(){
-    this.log('Cloning theme from GitHub...');
+    this.log('Cloning theme from ' + themeURI + ' ...');
     nodegit.Clone(themeURI, themeDir, cloneOptions)
     .then((function(){
-      this.log('Customizing the files with your theme name...');
+      this.log('Customizing theme files...\n');
 
       // Rename _s.pot language file
       fs.rename(
@@ -198,7 +198,7 @@ Generator.prototype.install = function(){
         replacement: '\'' + this.props.themeSlug + '\'',
         paths: [themeDir],
         recursive: true,
-        silent: false,
+        silent: true,
       });
 
       replace({
@@ -206,7 +206,7 @@ Generator.prototype.install = function(){
         replacement: this.props.themeSlug + '_',
         paths: [themeDir],
         recursive: true,
-        silent: false,
+        silent: true,
       });
 
       replace({
@@ -214,7 +214,7 @@ Generator.prototype.install = function(){
         replacement: 'Text Domain: ' + this.props.themeSlug,
         paths: [themeDir],
         recursive: true,
-        silent: false,
+        silent: true,
       });
 
       replace({
@@ -222,7 +222,7 @@ Generator.prototype.install = function(){
         replacement: ' ' + this.props.themeName,
         paths: [themeDir],
         recursive: true,
-        silent: false,
+        silent: true,
       });
 
       replace({
@@ -230,7 +230,7 @@ Generator.prototype.install = function(){
         replacement: this.props.themeSlug + '-',
         paths: [themeDir],
         recursive: true,
-        silent: false,
+        silent: true,
       });
     }).bind(this));
   }).bind(this);
@@ -264,7 +264,10 @@ Generator.prototype.install = function(){
   this.installDependencies();
 };
 
-// Generator.prototype.end = function(){
-//   var foundationSettings = '';
-//   fs.createReadStream('test.log').pipe(fs.createWriteStream('newLog.log'));
-// };
+Generator.prototype.end = {
+  foundationSettings: function(){
+    var assets = 'wp-content/themes/' + this.props.themeSlug + '/assets';
+    fs.createReadStream(assets + '/vendor/foundation/scss/foundation/settings.scss')
+      .pipe(fs.createWriteStream(assets + 'scss/_settings.scss'));
+  }
+};
