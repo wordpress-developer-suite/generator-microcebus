@@ -1,7 +1,7 @@
 {
   "name": "generator-microcebus",
   "version": "0.1.0",
-  "description": "Generate an WordPress project using Ikayzo's opinionated workflow.",
+  "description": "Generate a WordPress project using Ikayzo's opinionated workflow.",
   "homepage": "https://github.com/micjamking/generator-microcebus",
   "repository": {
     "type": "git",
