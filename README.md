@@ -68,4 +68,4 @@ command or commands that cause the issue. -->
 
 ## License
 
-MIT © Mike King [mike@ikayzo.com](mailto:mike@ikayzo.com)<!--  and other contributors -->
+MIT © Mike King [mike@ikayzo.com](mailto:mike@ikayzo.com) <!--  and other contributors -->
