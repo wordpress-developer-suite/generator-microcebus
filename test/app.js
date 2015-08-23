@@ -8,6 +8,8 @@ describe('microcebus', function(){
 
   beforeEach(function(done){
     helpers.run(path.join(__dirname, '../app'))
+      .inDir(path.join(__dirname, '.tmp'))
+      .withPrompts({dbUser: 'test', dbPass: 'test'})
       .on('end', done);
   });
 
