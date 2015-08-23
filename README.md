@@ -1,84 +1,61 @@
 # generator-microcebus
 
-> Generate a WordPress project using _[our](http://ikayzo.com)_ opinionated workflow
+> [Yeoman](http://yeoman.io/) generator that scaffolds an opinionated WordPress app
+
+
+## Features
+
+- A [modified version](https://github.com/ikayzo/_s) of [\_s \(underscores\)](https://github.com/automattic/_s) WordPress starter theme
+- [Foundation framework](http://foundation.zurb.com/) for responsive web design
+- [GruntJS](http://gruntjs.com/) for build task automation
+  - [Sass](http://sass-lang.com/) for CSS preprocessing
+  - [Autoprefixer](https://github.com/postcss/autoprefixer) for prefix-free CSS3
+  - [Watch](https://github.com/gruntjs/grunt-contrib-watch) for livereloading of CSS/JS assets
+  - [JSHint](https://github.com/gruntjs/grunt-contrib-jshint) for JavaScript linting / validation
+- [Hologram](http://trulia.github.io/hologram/) for generating theme CSS style guides  
 
 Maintainer: [Mike King](https://github.com/micjamking)
 
 ## Requirements
-This package depends on [WP-CLI](http://wp-cli.org/) which, if not already installed, will be installed up downloading this package. Below are the requirements for WP-CLI
-- UNIX-like environment (OS X, Linux, FreeBSD, Cygwin); limited support in Windows environment
-- PHP 5.3.2 or later
-- WordPress 3.5.2 or later
+[NodeJS](http://nodejs.org/) & [Yeoman](http://yeoman.io/) are obviously required. Additionally, this package requires the below additional software.
+
+- [WP-CLI](http://wp-cli.org/) command line interface for WordPress
+- [Bundler](http://bundler.io/) for managing ruby dependencies (necessary evil to support [hologram style guides](http://trulia.github.io/hologram/))
 
 ## Getting started
+Download the generator
+```
+$ npm install -g generator-microcebus
+```
+Run the generator
+```
+$ yo microcebus
 
-- Install: `npm install -g generator-microcebus`
-- Run: `yo microcebus`
-- Run: `bundle` or `gem install hologram` _(if you don't have bundler installed.)_
+     _-----_
+    |       |    .--------------------------.
+    |--(o)--|    |      Welcome to the      |
+   `---------´   |   Microcebus WordPress   |
+    ( _´U`_ )    |        generator!        |
+    /___A___\    '--------------------------'
+     |  ~  |
+   __'.___.'__
+ ´   `  |° ´ Y `
 
-_(Make sure MySQL is started and the database username and database password already exist.)_
+? Would you mind telling me your username on GitHub?
+? Theme Name: Microcebus
+? Theme Slug: microcebus
+? Database Name: wp_microcebus
+? Database User: developer
+? Database Password:
+? Description: A Custom WordPress theme created for Microcebus by someuser
+```
+Install additional ruby dependencies
+```
+$ bundle
+```
+_Or `gem install hologram` _(if you don't have bundler installed.)_
 
-## What do you get?
-
-Scaffolds out a complete project directory structure for you:
-
-    .
-    ├── wp-admin
-    ├── wp-content
-    │   ├── plugins
-    │   └── themes
-    │       └── microcebus
-    │           ├── assets
-    │           ├── languages
-    │           ├── layouts
-    │           ├── lib
-    │           ├── templates
-    │           ├── 404.php
-    │           ├── archive.php
-    │           ├── codesniffer.ruleset.xml
-    │           ├── comments.php
-    │           ├── CONTRIBUTING.md
-    │           ├── footer.php
-    │           ├── functions.php
-    │           ├── header.php
-    │           ├── index.php
-    │           ├── page.php
-    │           ├── README.md
-    │           ├── rtl.css
-    │           ├── screenshot.png
-    │           ├── search.php
-    │           ├── sidebar.php
-    │           ├── single.php
-    │           └── style.css
-    ├── wp-includes
-    ├── .bowerrc
-    ├── .editorconfig
-    ├── .gitignore
-    ├── .jshintrc
-    ├── bower.json
-    ├── Gemfile
-    ├── hologram_config.yml
-    ├── index.php
-    ├── license.txt
-    ├── package.json
-    ├── plugins
-    ├── readme.html
-    ├── README.md
-    ├── wp-activate.php
-    ├── wp-blog-header.php
-    ├── wp-comments-post.php
-    ├── wp-config-sample.php
-    ├── wp-config.php
-    ├── wp-cron.php
-    ├── wp-links-opml.php
-    ├── wp-load.php
-    ├── wp-login.php
-    ├── wp-mail.php
-    ├── wp-settings.php
-    ├── wp-signup.php
-    ├── wp-trackback.php
-    └── xmlrpc.php
-
+_(Make sure MySQL is started and the database username and password exist, otherwise WP CLI will choke during installation.)_
 
 <!-- ## Contributing
 
