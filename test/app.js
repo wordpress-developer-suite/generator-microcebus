@@ -8,12 +8,6 @@ describe('microcebus:app', function(){
 
   before(function(done){
     helpers.run(path.join(__dirname, '../app'))
-      .inDir(path.join(__dirname, '.tmp'))
-      .withOptions({'skip-install': true})
-      .withPrompts({
-        dbUser: 'root',
-        dbPass: '1234'
-      })
       .on('end', done);
   });
 
