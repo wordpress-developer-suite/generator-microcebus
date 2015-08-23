@@ -1,4 +1,4 @@
-# generator-microcebus
+# generator-microcebus [![Build Status](https://travis-ci.org/micjamking/generator-microcebus.svg?branch=master)](https://travis-ci.org/micjamking/generator-microcebus)
 
 > [Yeoman](http://yeoman.io/) generator that scaffolds an opinionated WordPress app
 
