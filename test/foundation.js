@@ -8,6 +8,11 @@ describe('microcebus:foundation', function(){
 
   before(function(done){
     helpers.run(path.join(__dirname, '../app'))
+      .inDir(path.join(__dirname, '.tmp'))
+      .withOptions({'skip-install': true})
+      .withPrompts({
+        dbUser: 'root',
+      })
       .on('end', done);
   });
 

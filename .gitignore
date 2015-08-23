@@ -11,3 +11,4 @@ Icon
 
 # Build Process
 node_modules
+.tmp
