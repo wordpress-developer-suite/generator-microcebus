@@ -180,7 +180,7 @@ Generator.prototype.install = function(){
     this.log('Cloning theme from ' + themeURI + ' ...');
     nodegit.Clone(themeURI, themeDir, cloneOptions)
     .then((function(){
-      this.log('Customizing theme files...\n');
+      this.log('Customizing theme files...');
 
       // Rename _s.pot language file
       fs.rename(
@@ -192,7 +192,8 @@ Generator.prototype.install = function(){
         }
       });
 
-      // Replace _s pattern for theme slug
+      // Find/replace pattern for theme slug (ie. '_s')
+      // https://github.com/Automattic/_s#getting-started
       replace({
         regex: '\'_s\'',
         replacement: '\'' + this.props.themeSlug + '\'',
@@ -267,7 +268,7 @@ Generator.prototype.install = function(){
 Generator.prototype.end = {
   foundationSettings: function(){
     var assets = 'wp-content/themes/' + this.props.themeSlug + '/assets';
-    fs.createReadStream(assets + '/vendor/foundation/scss/foundation/settings.scss')
-      .pipe(fs.createWriteStream(assets + 'scss/_settings.scss'));
+    fs.createReadStream(assets + '/vendor/foundation/scss/foundation/_settings.scss')
+      .pipe(fs.createWriteStream(assets + '/scss/_settings.scss'));
   }
 };
