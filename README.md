@@ -17,7 +17,7 @@
 Maintainer: [Mike King](https://github.com/micjamking)
 
 ## Requirements
-[NodeJS](http://nodejs.org/) & [Yeoman](http://yeoman.io/) are obviously required. Additionally, this package requires the below additional software.
+[NodeJS](http://nodejs.org/) & [Yeoman](http://yeoman.io/) are obviously required. Additionally, this package requires the following  packages:
 
 - [WP-CLI](http://wp-cli.org/) command line interface for WordPress
 - [Bundler](http://bundler.io/) for managing ruby dependencies (necessary evil to support [hologram style guides](http://trulia.github.io/hologram/))
@@ -41,21 +41,21 @@ $ yo microcebus
    __'.___.'__
  ´   `  |° ´ Y `
 
-? Would you mind telling me your username on GitHub?
-? Theme Name: Microcebus
-? Theme Slug: microcebus
-? Database Name: wp_microcebus
-? Database User: developer
+? GitHub Username (for Theme Author info)?
+? Theme Name:
+? Theme Slug:
+? Theme Description:
+? Database Name:
+? Database User:
 ? Database Password:
-? Description: A Custom WordPress theme created for Microcebus by someuser
 ```
+_*Make sure MySQL is started and the database username and password exist, otherwise WP CLI will choke during installation._
+
 Install additional ruby dependencies
 ```
 $ bundle
 ```
-_Or `gem install hologram` _(if you don't have bundler installed.)_
-
-_(Make sure MySQL is started and the database username and password exist, otherwise WP CLI will choke during installation.)_
+_*Or `gem install hologram` (if you don't have bundler installed.)_
 
 <!-- ## Contributing
 
@@ -66,7 +66,6 @@ guidelines](https://github.com/yeoman/yeoman/blob/master/contributing.md#issue-s
 Especially important is to make sure Yeoman is up-to-date, and providing the
 command or commands that cause the issue. -->
 
-
 ## License
 
-MIT © Mike King [mike@ikayzo.com](mailto:mike@ikayzo.com) and other contributors
+MIT © Mike King [mike@ikayzo.com](mailto:mike@ikayzo.com)<!--  and other contributors -->

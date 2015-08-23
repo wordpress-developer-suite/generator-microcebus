@@ -22,16 +22,13 @@ util.inherits(Generator, yeoman.generators.Base);
 Generator.prototype.prompting = function(){
   var done = this.async();
 
-  // Have Yeoman greet the user.
   this.log(yosay(
     'Welcome to the ' + chalk.red('Microcebus') + ' WordPress generator!'
   ));
 
-  this.log('Create your underscores based theme:');
-
   var prompts = [{
     name: 'githubUser',
-    message: 'Would you mind telling me your username on GitHub?',
+    message: 'What\'s your GitHub username (for theme author info)?',
     default: 'someuser'
   },{
     type: 'input',
@@ -44,6 +41,12 @@ Generator.prototype.prompting = function(){
     name: 'themeSlug',
     message: 'Theme Slug',
     default: this.appname
+  },
+  {
+    type: 'input',
+    name: 'themeDesc',
+    message: 'Theme Description',
+    default: 'A Custom WordPress theme created for ' + helpers.capitalize(this.appname)
   },
   {
     type: 'input',
@@ -60,12 +63,6 @@ Generator.prototype.prompting = function(){
     type: 'password',
     name: 'dbPass',
     message: 'Database Password'
-  },
-  {
-    type: 'input',
-    name: 'themeDesc',
-    message: 'Description',
-    default: 'A Custom WordPress theme created for ' + helpers.capitalize(this.appname)
   }];
 
   this.prompt(prompts, function(props){
@@ -169,6 +166,15 @@ Generator.prototype.install = function(){
     }
   };
 
+  var config = {
+    dbname: this.props.dbName,
+    dbuser: this.props.dbUser
+  };
+
+  if (this.props.dbPass.length > 0) {
+    config.dbpass = this.props.dbPass;
+  }
+
   var downloadTheme = (function(){
     this.log('Cloning theme from GitHub...');
     nodegit.Clone(themeURI, themeDir, cloneOptions)
@@ -187,16 +193,8 @@ Generator.prototype.install = function(){
 
       // Replace _s pattern for theme slug
       replace({
-        regex: ' _s',
-        replacement: ' ' + this.props.themeName,
-        paths: [themeDir],
-        recursive: true,
-        silent: false,
-      });
-
-      replace({
-        regex: '_s',
-        replacement: this.props.themeSlug,
+        regex: '\'_s\'',
+        replacement: '\'' + this.props.themeSlug + '\'',
         paths: [themeDir],
         recursive: true,
         silent: false,
@@ -213,6 +211,14 @@ Generator.prototype.install = function(){
       replace({
         regex: 'Text Domain: _s',
         replacement: 'Text Domain: ' + this.props.themeSlug,
+        paths: [themeDir],
+        recursive: true,
+        silent: false,
+      });
+
+      replace({
+        regex: ' _s',
+        replacement: ' ' + this.props.themeName,
         paths: [themeDir],
         recursive: true,
         silent: false,
@@ -241,11 +247,8 @@ Generator.prototype.install = function(){
 
       downloadTheme();
 
-      wp.core.config({
-        dbname: this.props.dbName,
-        dbuser: this.props.dbUser,
-        dbpass: this.props.dbPass,
-      },
+      wp.core.config(
+        config,
       (function(err, result){
         if (err){
           this.log(err);
