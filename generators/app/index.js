@@ -46,7 +46,7 @@ Generator.prototype.prompting = function(){
     type: 'input',
     name: 'themeDesc',
     message: 'Description',
-    default: 'A Custom WordPress theme created for X by John Doe'
+    default: 'A Custom WordPress theme created for' + helpers.capitalize(this.appname) + ' by someuser'
   }];
 
   this.prompt(prompts, function(props){
@@ -57,6 +57,17 @@ Generator.prototype.prompting = function(){
 
 Generator.prototype.configuring = function(){
   var done = this.async();
+
+  this.log('Downloading the latest version of WordPress using wp-cli...');
+
+  wp.discover(function(wp){
+    wp.cli.info(function(err, info){
+        console.log(info);
+    });
+    wp.core.download(function(err, result){
+      console.log(result);
+    });
+  });
 
   github(
     this.props.githubUser,
