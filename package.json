@@ -1,6 +1,6 @@
 {
   "name": "generator-microcebus",
-  "version": "0.1.11",
+  "version": "0.1.10",
   "description": "Generate a WordPress project using Ikayzo's opinionated workflow.",
   "homepage": "https://github.com/micjamking/generator-microcebus",
   "main": "app/index.js",
@@ -19,7 +19,9 @@
   },
   "scripts": {
     "test": "mocha --reporter spec",
-    "postversion": "git push && git push --tags"
+    "preversion": "npm test",
+    "version": "git add -A",
+    "postversion": "git push --tags"
   },
   "files": [
     "app"
