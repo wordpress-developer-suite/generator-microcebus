@@ -1,0 +1,3 @@
+{
+  "directory": "wp-content/themes/<%= appSlug %>/assets/vendor"
+}

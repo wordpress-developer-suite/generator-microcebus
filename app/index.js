@@ -108,6 +108,11 @@ Generator.prototype.writing = {
       userinfo
     );
     this.fs.copyTpl(
+      this.templatePath('_bowerrc'),
+      this.destinationPath('.bowerrc'),
+      userinfo
+    );
+    this.fs.copyTpl(
       this.templatePath('_gitignore'),
       this.destinationPath('.gitignore'),
       userinfo
@@ -137,10 +142,6 @@ Generator.prototype.writing = {
     this.fs.copy(
       this.templatePath('jshintrc'),
       this.destinationPath('.jshintrc')
-    );
-    this.fs.copy(
-      this.templatePath('bowerrc'),
-      this.destinationPath('.bowerrc')
     );
     this.fs.copy(
       this.templatePath('Gemfile'),
@@ -262,3 +263,8 @@ Generator.prototype.install = function(){
 
   this.installDependencies();
 };
+
+// Generator.prototype.end = function(){
+//   var foundationSettings = '';
+//   fs.createReadStream('test.log').pipe(fs.createWriteStream('newLog.log'));
+// };

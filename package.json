@@ -10,6 +10,9 @@
   "bugs": {
     "url": "https://github.com/micjamking/generator-microcebus/issues"
   },
+  "scripts": {
+    "test": "mocha"
+  },
   "author": {
     "name": "Mike King",
     "email": "mike@ikayzo.com",
