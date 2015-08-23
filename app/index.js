@@ -266,16 +266,17 @@ Generator.prototype.end = {
       var directory = fs.lstatSync(assets);
 
       if (directory.isDirectory()) {
-        this.log('Copy foundation override settings to `assets/scss...`');
+        this.log('Copying Foundation\'s _settings.scss to \'' + assets + '/scss/\' ...');
+
         fs.createReadStream(assets + '/vendor/foundation/scss/foundation/_settings.scss')
           .pipe(fs.createWriteStream(assets + '/scss/_settings.scss'));
       }
     }
     catch (e) {
-        this.log(e);
+      this.log(e);
     }
   },
   complete: function(){
-    this.log('Done! Happy coding...');
+    this.log('Done! Happy coding!');
   }
 };
