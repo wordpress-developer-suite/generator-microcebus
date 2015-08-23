@@ -5,7 +5,7 @@ var util    = require('util');
 var yeoman  = require('yeoman-generator');
 var yosay   = require('yosay');
 var wp      = require('wp-cli');
-var nodegit = require('nodegit');
+var clone   = require('git-clone');
 var replace = require('replace');
 var fs      = require('fs');
 
@@ -159,14 +159,6 @@ Generator.prototype.install = function(){
   var themeURI = 'https://github.com/ikayzo/_s.git';
   var themeDir = './wp-content/themes/' + this.props.themeSlug + '/';
 
-  var cloneOptions = {
-    remoteCallbacks: {
-      certificateCheck: function() {
-        return 1;
-      }
-    }
-  };
-
   var config = {
     dbname: this.props.dbName,
     dbuser: this.props.dbUser
@@ -178,8 +170,8 @@ Generator.prototype.install = function(){
 
   var downloadTheme = (function(){
     this.log('Cloning theme from ' + themeURI + ' ...');
-    nodegit.Clone(themeURI, themeDir, cloneOptions)
-    .then((function(){
+
+    clone(themeURI, themeDir, (function(){
       this.log('Customizing theme files...');
 
       // Rename _s.pot language file
@@ -267,16 +259,16 @@ Generator.prototype.install = function(){
 
 Generator.prototype.end = {
   foundationSettings: function(){
-    var assets    = 'wp-content/themes/' + this.props.themeSlug + '/assets';
+    var assets = 'wp-content/themes/' + this.props.themeSlug + '/assets';
 
     // Confirm directory exists
     try {
       var directory = fs.lstatSync(assets);
 
       if (directory.isDirectory()) {
+        this.log('Copy foundation override settings to `assets/scss...`');
         fs.createReadStream(assets + '/vendor/foundation/scss/foundation/_settings.scss')
           .pipe(fs.createWriteStream(assets + '/scss/_settings.scss'));
-        this.log('Copy foundation override settings to `assets/scss...`');
       }
     }
     catch (e) {
