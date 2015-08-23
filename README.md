@@ -57,15 +57,6 @@ $ bundle
 ```
 _*Or `gem install hologram` (if you don't have bundler installed.)_
 
-<!-- ## Contributing
-
-See the [contribution docs](https://github.com/yeoman/yeoman/blob/master/contributing.md).
-
-When submitting an issue, please follow [the
-guidelines](https://github.com/yeoman/yeoman/blob/master/contributing.md#issue-submission).
-Especially important is to make sure Yeoman is up-to-date, and providing the
-command or commands that cause the issue. -->
-
 ## Note
 Only tested on OSX 10.10.4
 
