@@ -57,7 +57,7 @@ Generator.prototype.prompting = function(){
     message: 'Database User'
   },
   {
-    type: 'input',
+    type: 'password',
     name: 'dbPass',
     message: 'Database Password'
   },
@@ -65,7 +65,7 @@ Generator.prototype.prompting = function(){
     type: 'input',
     name: 'themeDesc',
     message: 'Description',
-    default: 'A Custom WordPress theme created for ' + helpers.capitalize(this.appname) + ' by someuser'
+    default: 'A Custom WordPress theme created for ' + helpers.capitalize(this.appname)
   }];
 
   this.prompt(prompts, function(props){
