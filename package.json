@@ -18,7 +18,7 @@
     "url": "https://github.com/micjamking/generator-microcebus/issues"
   },
   "scripts": {
-    "test": "rm -rf ./test/.tmp && mocha --reporter spec"
+    "test": "mocha --reporter spec"
   },
   "author": {
     "name": "Mike King",
