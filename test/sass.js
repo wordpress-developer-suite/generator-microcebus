@@ -12,6 +12,7 @@ describe('microcebus:sass', function(){
       .withOptions({'skip-install': true})
       .withPrompts({
         dbUser: 'root',
+        dbPass: '1234'
       })
       .on('end', done);
   });
