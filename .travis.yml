@@ -1,3 +1,4 @@
+sudo: true
 language: node_js
 node_js:
   - 'iojs'
@@ -12,7 +13,6 @@ before_install:
   - sudo update-alternatives --config gcc;
   - sudo update-alternatives --config g++;
   - sudo update-alternatives --config gcov;
-  - BUILD_ONLY=true npm install
 git:
   depth: 100
 os:
