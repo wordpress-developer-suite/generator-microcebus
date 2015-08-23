@@ -1,23 +1,14 @@
 'use strict';
-var chalk  = require('chalk');
-var util   = require('util');
-var yeoman = require('yeoman-generator');
-var yosay  = require('yosay');
-var github = require('./github');
+// Vendor
+var chalk   = require('chalk');
+var util    = require('util');
+var yeoman  = require('yeoman-generator');
+var yosay   = require('yosay');
+var wp      = require('wp-cli');
 
-// Slugify text
-var slugify = function(string){
-  return string.toString().toLowerCase()
-    .replace(/\s+/g, '-')     // Replace spaces with -
-    .replace(/[^\w\-]+/g, '') // Remove all non-word chars
-    .replace(/\-\-+/g, '-')   // Replace multiple - with single -
-    .replace(/^-+/, '')       // Trim - from start of string
-    .replace(/-+$/, '');      // Trim - from end of string
-};
-
-var capitalize = function(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-};
+// Custom
+var github  = require('./github_user');
+var helpers = require('./helpers');
 
 var Generator = module.exports = function(){
   yeoman.generators.Base.apply(this, arguments);
@@ -30,7 +21,7 @@ Generator.prototype.prompting = function(){
 
   // Have Yeoman greet the user.
   this.log(yosay(
-    'Welcome to the premium ' + chalk.red('Microcebus') + ' generator!'
+    'Welcome to the ' + chalk.red('Microcebus') + ' WordPress generator!'
   ));
 
   this.log('Create your underscores based theme:');
@@ -43,7 +34,7 @@ Generator.prototype.prompting = function(){
     type: 'input',
     name: 'themeName',
     message: 'Theme Name',
-    default: capitalize(this.appname)
+    default: helpers.capitalize(this.appname)
   },
   {
     type: 'input',

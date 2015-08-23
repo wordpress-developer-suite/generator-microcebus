@@ -3,12 +3,11 @@
 var GitHubAPI = require('github');
 var url       = require('url');
 
-module.exports = (function(env){
-
-  this.proxy = env.http_proxy  ||
-               env.HTTP_PROXY  ||
-               env.https_proxy ||
-               env.HTTPS_PROXY ||
+function GitHubUser(){
+  this.proxy = process.env.http_proxy  ||
+               process.env.HTTP_PROXY  ||
+               process.env.https_proxy ||
+               process.env.HTTPS_PROXY ||
                null;
 
   this.options = {
@@ -26,14 +25,14 @@ module.exports = (function(env){
 
   this.github = new GitHubAPI(this.options);
 
-  if (env.GITHUB_TOKEN) {
+  if (process.env.GITHUB_TOKEN) {
     this.github.authenticate({
       type: 'oauth',
-      token: env.GITHUB_TOKEN
+      token: process.env.GITHUB_TOKEN
     });
   }
 
-  return function (name, cb, log) {
+  return (function (name, cb, log) {
     this.github.user.getFrom({
       user: name
     }, function (err, res) {
@@ -48,5 +47,7 @@ module.exports = (function(env){
 
       cb(JSON.parse(JSON.stringify(res)));
     });
-  };
-})(process.env);
+  }).bind(this);
+}
+
+module.exports = new GitHubUser();
