@@ -272,7 +272,7 @@ Generator.prototype.install = function(){
 
 Generator.prototype.end = {
   foundationSettings: function(){
-    var assets = 'wp-content/themes/' + this.props.themeSlug + '/assets';
+    //var assets = 'wp-content/themes/' + this.props.themeSlug + '/assets';
 
     // Confirm directory exists
     // try {
