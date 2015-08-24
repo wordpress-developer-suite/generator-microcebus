@@ -86,74 +86,6 @@ Generator.prototype.configuring = function(){
   );
 };
 
-Generator.prototype.writing = {
-  templates: function(){
-    var userinfo = {
-      appName: this.props.themeName,
-      appSlug: this.props.themeSlug,
-      appDesc: this.props.themeDesc,
-      authorName: this.realname,
-      authorEmail: this.email,
-      authorURL: this.githubUrl
-    };
-
-    this.fs.copyTpl(
-      this.templatePath('_package.json'),
-      this.destinationPath('package.json'),
-      userinfo
-    );
-    this.fs.copyTpl(
-      this.templatePath('_bower.json'),
-      this.destinationPath('bower.json'),
-      userinfo
-    );
-    this.fs.copyTpl(
-      this.templatePath('_bowerrc'),
-      this.destinationPath('.bowerrc'),
-      userinfo
-    );
-    this.fs.copyTpl(
-      this.templatePath('_gitignore'),
-      this.destinationPath('.gitignore'),
-      userinfo
-    );
-    this.fs.copyTpl(
-      this.templatePath('_README.md'),
-      this.destinationPath('README.md'),
-      userinfo
-    );
-    this.fs.copyTpl(
-      this.templatePath('_hologram_config.yml'),
-      this.destinationPath('hologram_config.yml'),
-      userinfo
-    );
-    this.fs.copyTpl(
-      this.templatePath('_Gruntfile.js'),
-      this.destinationPath('Gruntfile.js'),
-      userinfo
-    );
-  },
-
-  staticFiles: function () {
-    this.fs.copy(
-      this.templatePath('editorconfig'),
-      this.destinationPath('.editorconfig')
-    );
-    this.fs.copy(
-      this.templatePath('jshintrc'),
-      this.destinationPath('.jshintrc')
-    );
-    this.fs.copy(
-      this.templatePath('Gemfile'),
-      this.destinationPath('Gemfile')
-    );
-    this.fs.copy(
-      this.templatePath('plugins'),
-      this.destinationPath('plugins')
-    );
-  }
-};
-
 Generator.prototype.getWordPress = function(){
 
   var themeURI = 'https://github.com/ikayzo/_s.git';
@@ -266,6 +198,74 @@ Generator.prototype.getWordPress = function(){
     }).bind(this));
 
   }).bind(this));
+};
+
+Generator.prototype.writing = {
+  templates: function(){
+    var userinfo = {
+      appName: this.props.themeName,
+      appSlug: this.props.themeSlug,
+      appDesc: this.props.themeDesc,
+      authorName: this.realname,
+      authorEmail: this.email,
+      authorURL: this.githubUrl
+    };
+
+    this.fs.copyTpl(
+      this.templatePath('_package.json'),
+      this.destinationPath('package.json'),
+      userinfo
+    );
+    this.fs.copyTpl(
+      this.templatePath('_bower.json'),
+      this.destinationPath('bower.json'),
+      userinfo
+    );
+    this.fs.copyTpl(
+      this.templatePath('_bowerrc'),
+      this.destinationPath('.bowerrc'),
+      userinfo
+    );
+    this.fs.copyTpl(
+      this.templatePath('_gitignore'),
+      this.destinationPath('.gitignore'),
+      userinfo
+    );
+    this.fs.copyTpl(
+      this.templatePath('_README.md'),
+      this.destinationPath('README.md'),
+      userinfo
+    );
+    this.fs.copyTpl(
+      this.templatePath('_hologram_config.yml'),
+      this.destinationPath('hologram_config.yml'),
+      userinfo
+    );
+    this.fs.copyTpl(
+      this.templatePath('_Gruntfile.js'),
+      this.destinationPath('Gruntfile.js'),
+      userinfo
+    );
+  },
+
+  staticFiles: function () {
+    this.fs.copy(
+      this.templatePath('editorconfig'),
+      this.destinationPath('.editorconfig')
+    );
+    this.fs.copy(
+      this.templatePath('jshintrc'),
+      this.destinationPath('.jshintrc')
+    );
+    this.fs.copy(
+      this.templatePath('Gemfile'),
+      this.destinationPath('Gemfile')
+    );
+    this.fs.copy(
+      this.templatePath('plugins'),
+      this.destinationPath('plugins')
+    );
+  }
 };
 
 Generator.prototype.install = function(){
