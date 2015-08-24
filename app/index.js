@@ -154,141 +154,145 @@ Generator.prototype.writing = {
   }
 };
 
-Generator.prototype.install = function(){
+Generator.prototype.install = {
 
-  var themeURI = 'https://github.com/ikayzo/_s.git';
-  var themeDir = './wp-content/themes/' + this.props.themeSlug + '/';
+  main: function(){
 
-  var config = {
-    dbname: this.props.dbName,
-    dbuser: this.props.dbUser
-  };
+    var themeURI = 'https://github.com/ikayzo/_s.git';
+    var themeDir = './wp-content/themes/' + this.props.themeSlug + '/';
 
-  if (this.props.dbPass && this.props.dbPass.length > 0) {
-    config.dbpass = this.props.dbPass;
-  }
+    var config = {
+      dbname: this.props.dbName,
+      dbuser: this.props.dbUser
+    };
 
-  var downloadTheme = (function(){
-    this.log('Cloning theme from ' + themeURI + ' ...');
+    if (this.props.dbPass && this.props.dbPass.length > 0) {
+      config.dbpass = this.props.dbPass;
+    }
 
-    clone(themeURI, themeDir, (function(){
-      this.log('Customizing theme files...');
+    var downloadTheme = (function(){
+      this.log('Cloning theme from ' + themeURI + ' ...');
 
-      // Rename _s.pot language file
-      fs.rename(
-        themeDir + '/languages/_s.pot',
-        themeDir + '/languages/' + this.props.themeSlug + '.pot',
-        function(err) {
-        if ( err ) {
-          console.log('ERROR: ' + err);
-        }
-      });
+      clone(themeURI, themeDir, (function(){
+        this.log('Customizing theme files...');
 
-      // Find/replace pattern for theme slug (ie. '_s')
-      // https://github.com/Automattic/_s#getting-started
-      replace({
-        regex: '\'_s\'',
-        replacement: '\'' + this.props.themeSlug + '\'',
-        paths: [themeDir],
-        recursive: true,
-        silent: true,
-      });
+        // Rename _s.pot language file
+        fs.rename(
+          themeDir + '/languages/_s.pot',
+          themeDir + '/languages/' + this.props.themeSlug + '.pot',
+          function(err) {
+          if ( err ) {
+            console.log('ERROR: ' + err);
+          }
+        });
 
-      replace({
-        regex: '_s_',
-        replacement: this.props.themeSlug + '_',
-        paths: [themeDir],
-        recursive: true,
-        silent: true,
-      });
-
-      replace({
-        regex: 'Text Domain: _s',
-        replacement: 'Text Domain: ' + this.props.themeSlug,
-        paths: [themeDir],
-        recursive: true,
-        silent: true,
-      });
-
-      replace({
-        regex: ' _s',
-        replacement: ' ' + this.props.themeName,
-        paths: [themeDir],
-        recursive: true,
-        silent: true,
-      });
-
-      replace({
-        regex: '_s-',
-        replacement: this.props.themeSlug + '-',
-        paths: [themeDir],
-        recursive: true,
-        silent: true,
-      });
-    }).bind(this));
-  }).bind(this);
-
-  wp.discover((function(wp){
-    wp.cli.info((function(err, info){
-      if (err){
-        this.log('WP CLI is not installed or configured properly!');
-        this.log('Please install: http://wp-cli.org/#install');
-      }
-    }).bind(this));
-
-    wp.core.download((function(err, result){
-      this.log(result);
-
-      downloadTheme();
-
-      wp.core.config(
-        config,
-      (function(err, result){
-        if (err){
-          this.log(err);
-        }
-        this.log(result);
-        this.log('Making our custom theme the default theme...');
-
-        var endOfConfig  = /\$table_prefix = \'wp_\'\;/;
-        var defaultTheme = 'define( \'WP_DEFAULT_THEME\', \'' + this.props.themeSlug + '\' );';
-
+        // Find/replace pattern for theme slug (ie. '_s')
+        // https://github.com/Automattic/_s#getting-started
         replace({
-          regex: endOfConfig,
-          replacement: '$table_prefix = \'wp_\';\n' + defaultTheme,
-          paths: ['./wp-config.php'],
-          recursive: false,
+          regex: '\'_s\'',
+          replacement: '\'' + this.props.themeSlug + '\'',
+          paths: [themeDir],
+          recursive: true,
           silent: true,
         });
+
+        replace({
+          regex: '_s_',
+          replacement: this.props.themeSlug + '_',
+          paths: [themeDir],
+          recursive: true,
+          silent: true,
+        });
+
+        replace({
+          regex: 'Text Domain: _s',
+          replacement: 'Text Domain: ' + this.props.themeSlug,
+          paths: [themeDir],
+          recursive: true,
+          silent: true,
+        });
+
+        replace({
+          regex: ' _s',
+          replacement: ' ' + this.props.themeName,
+          paths: [themeDir],
+          recursive: true,
+          silent: true,
+        });
+
+        replace({
+          regex: '_s-',
+          replacement: this.props.themeSlug + '-',
+          paths: [themeDir],
+          recursive: true,
+          silent: true,
+        });
+      }).bind(this));
+    }).bind(this);
+
+    wp.discover((function(wp){
+      wp.cli.info((function(err, info){
+        if (err){
+          this.log('WP CLI is not installed or configured properly!');
+          this.log('Please install: http://wp-cli.org/#install');
+        }
+      }).bind(this));
+
+      wp.core.download((function(err, result){
+        this.log(result);
+
+        downloadTheme();
+
+        wp.core.config(
+          config,
+        (function(err, result){
+          if (err){
+            this.log(err);
+          }
+          this.log(result);
+          this.log('Making our custom theme the default theme...');
+
+          var endOfConfig  = /\$table_prefix = \'wp_\'\;/;
+          var defaultTheme = 'define( \'WP_DEFAULT_THEME\', \'' + this.props.themeSlug + '\' );';
+
+          replace({
+            regex: endOfConfig,
+            replacement: '$table_prefix = \'wp_\';\n' + defaultTheme,
+            paths: ['./wp-config.php'],
+            recursive: false,
+            silent: true,
+          });
+
+        }).bind(this));
 
       }).bind(this));
 
     }).bind(this));
 
-  }).bind(this));
+    this.installDependencies();
+  },
 
-  this.installDependencies();
+  foundationSettings: function(){
+    var assets = 'wp-content/themes/' + this.props.themeSlug + '/assets';
+
+    // Confirm directory exists
+    try {
+      var directory = fs.lstatSync(assets);
+
+      if (directory.isDirectory()) {
+        this.log('Copying Foundation\'s _settings.scss to \'' + assets + '/scss/\' ...');
+
+        fs.createReadStream(assets + '/vendor/foundation/scss/foundation/_settings.scss')
+          .pipe(fs.createWriteStream(assets + '/scss/_settings.scss'));
+      }
+    }
+    catch (e) {
+      this.log(e);
+    }
+  }
 };
 
 Generator.prototype.end = {
-  foundationSettings: function(){
-    //var assets = 'wp-content/themes/' + this.props.themeSlug + '/assets';
-
-    // Confirm directory exists
-    // try {
-    //   var directory = fs.lstatSync(assets);
-    //
-    //   if (directory.isDirectory()) {
-    //     this.log('Copying Foundation\'s _settings.scss to \'' + assets + '/scss/\' ...');
-    //
-    //     fs.createReadStream(assets + '/vendor/foundation/scss/foundation/_settings.scss')
-    //       .pipe(fs.createWriteStream(assets + '/scss/_settings.scss'));
-    //   }
-    // }
-    // catch (e) {
-    //   this.log(e);
-    // }
-  },
   complete: function(){
     this.log('Done! Happy coding!');
   }
