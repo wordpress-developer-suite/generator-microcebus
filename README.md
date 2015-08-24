@@ -17,10 +17,21 @@
 Maintainer: [Mike King](https://github.com/micjamking)
 
 ## Requirements
-[NodeJS](http://nodejs.org/) & [Yeoman](http://yeoman.io/) are obviously required. Additionally, this package requires the following  packages:
+[NodeJS](http://nodejs.org/) & [Yeoman](http://yeoman.io/) are obviously required. Additionally, this package requires the following packages:
 
 - [WP-CLI](http://wp-cli.org/) command line interface for WordPress
+
+```
+$ curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+$ chmod +x wp-cli.phar
+$ sudo mv wp-cli.phar /usr/local/bin/wp
+$ wp --info
+```
 - [Bundler](http://bundler.io/) for managing ruby dependencies (necessary evil to support [hologram style guides](http://trulia.github.io/hologram/))
+
+```
+$ gem install bundler
+```
 
 ## Getting started
 Download the generator
