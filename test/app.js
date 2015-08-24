@@ -6,26 +6,17 @@ var helpers = require('yeoman-generator').test;
 
 describe('microcebus', function(){
 
-  // before(function(){
-  //   this.what = 2;
-  // });
-  //
-  // it('should equal 4', function(){
-  //   assert.equal(4, this.what*2);
-  // });
+  before(function(done){
+    helpers.run(path.join(__dirname, '../app'))
+      .withPrompts({
+        dbName: 'test',
+        dbUser: 'test',
+        dbPass: 'test'
+      })
+      .on('end', done);
+  });
 
   describe('scaffolding app', function(){
-    before(function(done){
-      helpers.run(path.join(__dirname, '../app'))
-        .inDir(path.join(__dirname, './.tmp'))
-        .withPrompts({
-          dbName: 'test',
-          dbUser: 'test',
-          dbPass: 'test'
-        })
-        .on('end', done);
-    });
-
     it('should create package files', function(){
       assert.file([
         'bower.json',
@@ -42,26 +33,26 @@ describe('microcebus', function(){
       ]);
     });
   });
-  //
-  // describe('installing foundation', function(){
-  //
-  //   it('should add the Foundation dependency', function(){
-  //     assert.fileContent('bower.json', 'foundation');
-  //   });
-  //
-  //   it('should add Foundation paths to Gruntfile.js', function(){
-  //     assert.fileContent('Gruntfile.js', 'foundation');
-  //   });
-  // });
-  //
-  // describe('installing sass', function(){
-  //
-  //   it('should add the Grunt plugin', function(){
-  //     assert.fileContent('package.json', 'sass');
-  //   });
-  //
-  //   it('should add the Grunt task', function(){
-  //     assert.fileContent('Gruntfile.js', 'sass');
-  //   });
-  // });
+
+  describe('installing foundation', function(){
+
+    it('should add the Foundation dependency', function(){
+      assert.fileContent('bower.json', 'foundation');
+    });
+
+    it('should add Foundation paths to Gruntfile.js', function(){
+      assert.fileContent('Gruntfile.js', 'foundation');
+    });
+  });
+
+  describe('installing sass', function(){
+
+    it('should add the Grunt plugin', function(){
+      assert.fileContent('package.json', 'sass');
+    });
+
+    it('should add the Grunt task', function(){
+      assert.fileContent('Gruntfile.js', 'sass');
+    });
+  });
 });
