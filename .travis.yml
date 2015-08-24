@@ -1,11 +1,12 @@
 sudo: false
 language: node_js
 node_js:
-  - '0.12'
-  - '0.10'
+- '0.12'
+- '0.10'
 deploy:
   provider: npm
-  email: "micjamking@gmail.com"
-  api_key: "bWljamFta2luZzptazI0ODQ="
+  email: micjamking@gmail.com
+  api_key:
+    secure: VAAkYIlTsWsrE2QK+6LQG+1MWAfdP+E5YQ79pyas3rH7+UP/c9j7+AV0AwS2Hq4Z4SgO7bD51+IgYiy0GqR9riJmHLbGkfq5cL+1N6g6iTRFuhhgi8Nrh7usGbVRfN94ZBsOAgrFwLEoNBcwu2YP85DdeX5cpT7CRJLIyWksc4obbKuQXd5sTvJCs/VWGcgzWLI4g+U1zMeTx9t9+7TXbYRcrjjYNE6ekIjsk4PApiRDqh5JnkCyuxXwjI0kAKqqdIWxvzzRMTNskCgFI6QqYRTCLzfBlzFBhdFH1vhQPAE8PLFHaaaVpQUAxBF68jcjLSl3M7CiyIg9YuAlknoa8KqI/xn9n4Jkur/I5vleeAtEjntd2kYv472udioONP1JRDv6beVkxpasrDBQi4pxGEwX8BDmBBMgjNzDIVsS8lFvv4tsxvxsshPlIH0ZB8Xug7FN6lgJj2dyMidUocrOHT61DH4UkNbz7PxJl3EiysM5Yt169LrF03OB0rE+/tSmlx7t2ZQIi7RPa0OqV26zkLXh9GKmtfLsqH37M8xzyMBmi9qu0Jyg6E0enmSdBsRZNQiks01Odw9mxOlXqSyf7HpeSOBW112znIg12+wYorCNyVsZhjqMXXZF6CJLqyT4sdiipaBEZj/tGDyNMphRXbT+8NLSDkI0B7uI01iPv18=
   on:
     tags: true
