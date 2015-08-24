@@ -10,7 +10,15 @@ describe('microcebus', function(){
 
     beforeEach(function(done){
       helpers.run(path.join(__dirname, '../app'))
-        .withPrompts({dbUser: 'test', dbPass: 'test'})
+        .withPrompts({
+          githubUser: 'test',
+          themeName: 'test',
+          themeSlug: 'test',
+          themeDesc: 'test',
+          dbName: 'test',
+          dbUser: 'test',
+          dbPass: 'test'
+        })
         .on('end', done);
     });
     it('should create package files', function(){
