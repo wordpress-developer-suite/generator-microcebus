@@ -1,7 +1,7 @@
 'use strict';
 
 var path    = require('path');
-// var assert  = require('yeoman-generator').assert;
+var assert  = require('yeoman-generator').assert;
 var helpers = require('yeoman-generator').test;
 
 describe('microcebus', function(){
@@ -24,24 +24,24 @@ describe('microcebus', function(){
   //   assert.equal(4, this.what*2);
   // });
 
-  // describe('scaffolding app', function(){
-  //
-  //   it('should create package files', function(){
-  //     assert.file([
-  //       'bower.json',
-  //       '.bowerrc',
-  //       '.gitignore',
-  //       'Gruntfile.js',
-  //       'hologram_config.yml',
-  //       'package.json',
-  //       'README.md',
-  //       '.editorconfig',
-  //       'Gemfile',
-  //       '.jshintrc',
-  //       'plugins'
-  //     ]);
-  //   });
-  // });
+  describe('scaffolding app', function(){
+
+    it('should create package files', function(){
+      assert.file([
+        'bower.json',
+        '.bowerrc',
+        '.gitignore',
+        'Gruntfile.js',
+        'hologram_config.yml',
+        'package.json',
+        'README.md',
+        '.editorconfig',
+        'Gemfile',
+        '.jshintrc',
+        'plugins'
+      ]);
+    });
+  });
   //
   // describe('installing foundation', function(){
   //
