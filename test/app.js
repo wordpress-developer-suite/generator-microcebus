@@ -8,13 +8,12 @@ describe('microcebus', function(){
 
   beforeEach(function(done){
     helpers.run(path.join(__dirname, '../app'))
-      .inDir(path.join(__dirname, '.tmp'))
       .withPrompts({dbUser: 'test', dbPass: 'test'})
       .on('end', done);
   });
 
-  describe('app', function(){
-    it('creates expected files', function(){
+  describe('app scaffolding', function(){
+    it('should create package files', function(){
       assert.file([
         'bower.json',
         '.bowerrc',
@@ -31,26 +30,22 @@ describe('microcebus', function(){
     });
   });
 
-  describe('foundation', function(){
-    it('adds the Foundation dependency', function(){
+  describe('installing foundation', function(){
+    it('should add the Foundation dependency', function(){
       assert.fileContent('bower.json', 'foundation');
     });
 
-    it('doesn\'t explicitly add the jQuery dependency', function(){
-      assert.noFileContent('bower.json', 'jquery');
-    });
-
-    it('adds Foundation paths to Gruntfile.js', function(){
+    it('should add Foundation paths to Gruntfile.js', function(){
       assert.fileContent('Gruntfile.js', 'foundation');
     });
   });
 
-  describe('sass', function(){
-    it('adds the Grunt plugin', function(){
+  describe('installing sass', function(){
+    it('should add the Grunt plugin', function(){
       assert.fileContent('package.json', 'sass');
     });
 
-    it('adds the Grunt task', function(){
+    it('should add the Grunt task', function(){
       assert.fileContent('Gruntfile.js', 'sass');
     });
   });
