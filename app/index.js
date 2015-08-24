@@ -273,6 +273,7 @@ Generator.prototype.end = {
       }
     }
     catch (e) {
+      console.log('Yo!');
       this.log(e);
     }
   },
