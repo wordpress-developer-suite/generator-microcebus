@@ -258,24 +258,24 @@ Generator.prototype.install = function(){
 };
 
 Generator.prototype.end = {
-  foundationSettings: function(){
-    var assets = 'wp-content/themes/' + this.props.themeSlug + '/assets';
-
-    // Confirm directory exists
-    // try {
-    //   var directory = fs.lstatSync(assets);
-    //
-    //   if (directory.isDirectory()) {
-    //     this.log('Copying Foundation\'s _settings.scss to \'' + assets + '/scss/\' ...');
-    //
-    //     fs.createReadStream(assets + '/vendor/foundation/scss/foundation/_settings.scss')
-    //       .pipe(fs.createWriteStream(assets + '/scss/_settings.scss'));
-    //   }
-    // }
-    // catch (e) {
-    //   this.log(e);
-    // }
-  },
+  // foundationSettings: function(){
+  //   var assets = 'wp-content/themes/' + this.props.themeSlug + '/assets';
+  //
+  //   // Confirm directory exists
+  //   try {
+  //     var directory = fs.lstatSync(assets);
+  //
+  //     if (directory.isDirectory()) {
+  //       this.log('Copying Foundation\'s _settings.scss to \'' + assets + '/scss/\' ...');
+  //
+  //       fs.createReadStream(assets + '/vendor/foundation/scss/foundation/_settings.scss')
+  //         .pipe(fs.createWriteStream(assets + '/scss/_settings.scss'));
+  //     }
+  //   }
+  //   catch (e) {
+  //     this.log(e);
+  //   }
+  // },
   complete: function(){
     this.log('Done! Happy coding!');
   }
