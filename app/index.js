@@ -250,13 +250,13 @@ Generator.prototype.install = function(){
         this.log(result);
         this.log('Making our custom theme the default theme...');
 
-        var endOfConfig  = '\/\* That\'s all, stop editing! Happy blogging. \*\/';
-        var defaultTheme = 'define( \'WP_DEFAULT_THEME\', \'' + this.props.themeSlug + '\' ); \n';
+        var endOfConfig  = /\$table_prefix = \'wp_\'\;/;
+        var defaultTheme = 'define( \'WP_DEFAULT_THEME\', \'' + this.props.themeSlug + '\' );';
 
         replace({
           regex: endOfConfig,
-          replacement: defaultTheme + endOfConfig,
-          paths: ['wp-config.php'],
+          replacement: '$table_prefix = \'wp_\';\n' + defaultTheme,
+          paths: ['./wp-config.php'],
           recursive: false,
           silent: false,
         });
