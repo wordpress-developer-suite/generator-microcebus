@@ -6,17 +6,6 @@ var helpers = require('yeoman-generator').test;
 
 describe('microcebus', function(){
 
-  before(function(done){
-    helpers.run(path.join(__dirname, '../app'))
-      .inDir(path.join(__dirname, './.tmp'))
-      .withPrompts({
-        dbName: 'test',
-        dbUser: 'test',
-        dbPass: 'test'
-      })
-      .on('end', done);
-  });
-
   // before(function(){
   //   this.what = 2;
   // });
@@ -26,6 +15,17 @@ describe('microcebus', function(){
   // });
 
   describe('scaffolding app', function(){
+    before(function(done){
+      helpers.run(path.join(__dirname, '../app'))
+        .inDir(path.join(__dirname, './.tmp'))
+        .withPrompts({
+          dbName: 'test',
+          dbUser: 'test',
+          dbPass: 'test'
+        })
+        .on('end', done);
+    });
+
     it('should create package files', function(){
       assert.file([
         'bower.json',
