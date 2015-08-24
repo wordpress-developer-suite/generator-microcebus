@@ -8,6 +8,7 @@ describe('microcebus', function(){
 
   before(function(done){
     helpers.run(path.join(__dirname, '../app'))
+      .inDir(path.join(__dirname, './.tmp'))
       .withPrompts({
         dbName: 'test',
         dbUser: 'test',
@@ -25,7 +26,6 @@ describe('microcebus', function(){
   // });
 
   describe('scaffolding app', function(){
-
     it('should create package files', function(){
       assert.file([
         'bower.json',
