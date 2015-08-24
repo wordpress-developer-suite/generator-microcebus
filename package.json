@@ -18,7 +18,7 @@
     "url": "https://github.com/micjamking/generator-microcebus/issues"
   },
   "scripts": {
-    "test": "mocha --timeout 15000 --reporter spec",
+    "test": "mocha --timeout 60000 --reporter spec",
     "preversion": "npm test",
     "postversion": "git push --tags"
   },
