@@ -21,6 +21,7 @@ describe('microcebus', function(){
         })
         .on('end', done);
     });
+
     it('should create package files', function(){
       assert.file([
         'bower.json',
@@ -38,35 +39,35 @@ describe('microcebus', function(){
     });
   });
 
-  describe('installing foundation', function(){
-
-    beforeEach(function(done){
-      helpers.run(path.join(__dirname, '../app'))
-        .withPrompts({dbUser: 'test', dbPass: 'test'})
-        .on('end', done);
-    });
-    it('should add the Foundation dependency', function(){
-      assert.fileContent('bower.json', 'foundation');
-    });
-
-    it('should add Foundation paths to Gruntfile.js', function(){
-      assert.fileContent('Gruntfile.js', 'foundation');
-    });
-  });
-
-  describe('installing sass', function(){
-
-    beforeEach(function(done){
-      helpers.run(path.join(__dirname, '../app'))
-        .withPrompts({dbUser: 'test', dbPass: 'test'})
-        .on('end', done);
-    });
-    it('should add the Grunt plugin', function(){
-      assert.fileContent('package.json', 'sass');
-    });
-
-    it('should add the Grunt task', function(){
-      assert.fileContent('Gruntfile.js', 'sass');
-    });
-  });
+  // describe('installing foundation', function(){
+  //
+  //   beforeEach(function(done){
+  //     helpers.run(path.join(__dirname, '../app'))
+  //       .withPrompts({dbUser: 'test', dbPass: 'test'})
+  //       .on('end', done);
+  //   });
+  //   it('should add the Foundation dependency', function(){
+  //     assert.fileContent('bower.json', 'foundation');
+  //   });
+  //
+  //   it('should add Foundation paths to Gruntfile.js', function(){
+  //     assert.fileContent('Gruntfile.js', 'foundation');
+  //   });
+  // });
+  //
+  // describe('installing sass', function(){
+  //
+  //   beforeEach(function(done){
+  //     helpers.run(path.join(__dirname, '../app'))
+  //       .withPrompts({dbUser: 'test', dbPass: 'test'})
+  //       .on('end', done);
+  //   });
+  //   it('should add the Grunt plugin', function(){
+  //     assert.fileContent('package.json', 'sass');
+  //   });
+  //
+  //   it('should add the Grunt task', function(){
+  //     assert.fileContent('Gruntfile.js', 'sass');
+  //   });
+  // });
 });
