@@ -4,7 +4,7 @@ var chalk   = require('chalk');
 var util    = require('util');
 var yeoman  = require('yeoman-generator');
 var yosay   = require('yosay');
-// var wp      = require('wp-cli');
+var wp      = require('wp-cli');
 var clone   = require('git-clone');
 var replace = require('replace');
 var fs      = require('fs');
@@ -91,14 +91,14 @@ Generator.prototype.getWordPress = function(){
   var themeURI = 'https://github.com/ikayzo/_s.git';
   var themeDir = './wp-content/themes/' + this.props.themeSlug + '/';
 
-  // var config = {
-  //   dbname: this.props.dbName,
-  //   dbuser: this.props.dbUser
-  // };
-  //
-  // if (this.props.dbPass && this.props.dbPass.length > 0) {
-  //   config.dbpass = this.props.dbPass;
-  // }
+  var config = {
+    dbname: this.props.dbName,
+    dbuser: this.props.dbUser
+  };
+
+  if (this.props.dbPass && this.props.dbPass.length > 0) {
+    config.dbpass = this.props.dbPass;
+  }
 
   var downloadTheme = (function(){
     this.log('Cloning theme from ' + themeURI + ' ...');
@@ -162,44 +162,44 @@ Generator.prototype.getWordPress = function(){
 
   downloadTheme();
 
-  // wp.discover((function(wp){
-  //   wp.cli.info((function(err, info){
-  //     if (err){
-  //       this.log('WP CLI is not installed or configured properly!');
-  //       this.log('Please install: http://wp-cli.org/#install');
-  //     }
-  //   }).bind(this));
-  //
-  //   wp.core.download((function(err, result){
-  //     this.log(result);
-  //
-  //     downloadTheme();
-  //
-  //     wp.core.config(
-  //       config,
-  //     (function(err, result){
-  //       if (err){
-  //         this.log(err);
-  //       }
-  //       this.log(result);
-  //       this.log('Making our custom theme the default theme...');
-  //
-  //       var endOfConfig  = /\$table_prefix = \'wp_\'\;/;
-  //       var defaultTheme = 'define( \'WP_DEFAULT_THEME\', \'' + this.props.themeSlug + '\' );';
-  //
-  //       replace({
-  //         regex: endOfConfig,
-  //         replacement: '$table_prefix = \'wp_\';\n' + defaultTheme,
-  //         paths: ['./wp-config.php'],
-  //         recursive: false,
-  //         silent: true,
-  //       });
-  //
-  //     }).bind(this));
-  //
-  //   }).bind(this));
-  //
-  // }).bind(this));
+  wp.discover((function(wp){
+    wp.cli.info((function(err, info){
+      if (err){
+        this.log('WP CLI is not installed or configured properly!');
+        this.log('Please install: http://wp-cli.org/#install');
+      }
+    }).bind(this));
+
+    wp.core.download((function(err, result){
+      this.log(result);
+
+      downloadTheme();
+
+      wp.core.config(
+        config,
+      (function(err, result){
+        if (err){
+          this.log(err);
+        }
+        this.log(result);
+        this.log('Making our custom theme the default theme...');
+
+        var endOfConfig  = /\$table_prefix = \'wp_\'\;/;
+        var defaultTheme = 'define( \'WP_DEFAULT_THEME\', \'' + this.props.themeSlug + '\' );';
+
+        replace({
+          regex: endOfConfig,
+          replacement: '$table_prefix = \'wp_\';\n' + defaultTheme,
+          paths: ['./wp-config.php'],
+          recursive: false,
+          silent: true,
+        });
+
+      }).bind(this));
+
+    }).bind(this));
+
+  }).bind(this));
 };
 
 Generator.prototype.writing = {
