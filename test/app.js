@@ -6,7 +6,7 @@ var helpers = require('yeoman-generator').test;
 
 describe('microcebus', function(){
 
-  beforeEach(function(done){
+  before(function(done){
     helpers.run(path.join(__dirname, '../app'))
       .withPrompts({
         dbName: 'test',
