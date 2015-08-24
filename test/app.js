@@ -6,7 +6,7 @@ var helpers = require('yeoman-generator').test;
 
 describe('microcebus', function(){
 
-  describe('app scaffolding', function(){
+  describe('scaffolding app', function(){
 
     beforeEach(function(done){
       helpers.run(path.join(__dirname, '../app'))
