@@ -274,6 +274,7 @@ Generator.prototype.end = {
     }
     catch (e) {
       console.log('Yo!');
+      console.log(e);
       this.log(e);
     }
   },
