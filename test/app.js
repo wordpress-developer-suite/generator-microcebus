@@ -6,13 +6,13 @@ var helpers = require('yeoman-generator').test;
 
 describe('microcebus', function(){
 
-  beforeEach(function(done){
-    helpers.run(path.join(__dirname, '../app'))
-      .withPrompts({dbUser: 'test', dbPass: 'test'})
-      .on('end', done);
-  });
-
   describe('app scaffolding', function(){
+
+    beforeEach(function(done){
+      helpers.run(path.join(__dirname, '../app'))
+        .withPrompts({dbUser: 'test', dbPass: 'test'})
+        .on('end', done);
+    });
     it('should create package files', function(){
       assert.file([
         'bower.json',
@@ -31,6 +31,12 @@ describe('microcebus', function(){
   });
 
   describe('installing foundation', function(){
+
+    beforeEach(function(done){
+      helpers.run(path.join(__dirname, '../app'))
+        .withPrompts({dbUser: 'test', dbPass: 'test'})
+        .on('end', done);
+    });
     it('should add the Foundation dependency', function(){
       assert.fileContent('bower.json', 'foundation');
     });
@@ -41,6 +47,12 @@ describe('microcebus', function(){
   });
 
   describe('installing sass', function(){
+
+    beforeEach(function(done){
+      helpers.run(path.join(__dirname, '../app'))
+        .withPrompts({dbUser: 'test', dbPass: 'test'})
+        .on('end', done);
+    });
     it('should add the Grunt plugin', function(){
       assert.fileContent('package.json', 'sass');
     });

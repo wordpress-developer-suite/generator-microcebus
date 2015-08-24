@@ -258,7 +258,7 @@ Generator.prototype.install = function(){
           replacement: '$table_prefix = \'wp_\';\n' + defaultTheme,
           paths: ['./wp-config.php'],
           recursive: false,
-          silent: false,
+          silent: true,
         });
 
       }).bind(this));

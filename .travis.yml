@@ -1,8 +1,13 @@
-sudo: false
+sudo: true
 language: node_js
 node_js:
   - '0.12'
   - '0.10'
+before_install:
+  - curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar /tmp/wp-cli.phar
+  - php wp-cli.phar --info
+  - chmod +x wp-cli.phar
+  - sudo mv wp-cli.phar /usr/local/bin/wp
 deploy:
   provider: npm
   email: micjamking@gmail.com
