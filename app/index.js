@@ -154,7 +154,7 @@ Generator.prototype.writing = {
   }
 };
 
-Generator.prototype.install = function(){
+Generator.prototype.getWordPress = function(){
 
   var themeURI = 'https://github.com/ikayzo/_s.git';
   var themeDir = './wp-content/themes/' + this.props.themeSlug + '/';
@@ -266,12 +266,10 @@ Generator.prototype.install = function(){
     }).bind(this));
 
   }).bind(this));
-
-  this.installDependencies();
 };
 
-Generator.prototype.end = {
-  settings: function(){
+Generator.prototype.install = function(){
+  var settings = function(){
     var assets = 'wp-content/themes/' + this.props.themeSlug + '/assets';
 
     // Confirm directory exists
@@ -288,8 +286,12 @@ Generator.prototype.end = {
     catch (e) {
       this.log(e);
     }
-  },
-  complete: function(){
-    this.log('Done! Happy coding!');
-  }
+  };
+
+  this.installDependencies();
+  settings();
+};
+
+Generator.prototype.end = function(){
+  this.log('Done! Happy coding!');
 };
