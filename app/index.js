@@ -250,7 +250,7 @@ Generator.prototype.install = function(){
         this.log(result);
         this.log('Making our custom theme the default theme...');
 
-        var endOfConfig  = '\/* That\'s all, stop editing! Happy blogging. *\/';
+        var endOfConfig  = '\/\* That\'s all, stop editing! Happy blogging. \*\/';
         var defaultTheme = 'define( \'WP_DEFAULT_THEME\', \'' + this.props.themeSlug + '\' ); \n';
 
         replace({
@@ -258,7 +258,7 @@ Generator.prototype.install = function(){
           replacement: defaultTheme + endOfConfig,
           paths: ['wp-config.php'],
           recursive: false,
-          silent: true,
+          silent: false,
         });
 
       }).bind(this));
