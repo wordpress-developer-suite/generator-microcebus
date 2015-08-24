@@ -4,9 +4,9 @@ var chalk   = require('chalk');
 var util    = require('util');
 var yeoman  = require('yeoman-generator');
 var yosay   = require('yosay');
-//var wp      = require('wp-cli');
-//var clone   = require('git-clone');
-//var replace = require('replace');
+// var wp      = require('wp-cli');
+// var clone   = require('git-clone');
+// var replace = require('replace');
 var fs      = require('fs');
 
 // Custom
@@ -269,7 +269,7 @@ Generator.prototype.writing = {
 };
 
 Generator.prototype.install = function(){
-  var settings = function(){
+  var settings = (function(){
     var assets = 'wp-content/themes/' + this.props.themeSlug + '/assets';
 
     // Confirm directory exists
@@ -286,7 +286,7 @@ Generator.prototype.install = function(){
     catch (e) {
       this.log(e);
     }
-  };
+  }).bind(this);
 
   this.installDependencies();
   settings();
