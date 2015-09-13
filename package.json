@@ -43,6 +43,7 @@
     "yosay": "^1.0.2"
   },
   "devDependencies": {
-    "mocha": "*"
+    "mocha": "*",
+    "rimraf": "^2.4.3"
   }
 }

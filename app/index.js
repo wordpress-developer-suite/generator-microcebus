@@ -8,6 +8,7 @@ var wp      = require('wp-cli');
 var clone   = require('git-clone');
 var replace = require('replace');
 var fs      = require('fs');
+var rm      = require('rimraf');
 
 // Custom
 var github  = require('./github_user');
@@ -104,7 +105,12 @@ Generator.prototype.getWordPress = function(){
     this.log('Cloning theme from ' + themeURI + ' ...');
 
     clone(themeURI, themeDir, (function(){
-      this.log('Customizing theme files...');
+      this.log('Removing theme .git submodule...'); 
+
+      // Remove .git folder inside of theme
+      rm(themeDir + '/.git', (function(){
+        this.log('Customizing theme files...');
+      }).bind(this));
 
       // Rename _s.pot language file
       fs.rename(
