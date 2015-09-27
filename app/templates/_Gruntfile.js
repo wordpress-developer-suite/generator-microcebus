@@ -48,7 +48,6 @@ module.exports = function (grunt) {
       cssmin: {
         target: {
           files: {
-            expand: true,
             '<%%= app %>/style.css': '<%%= app %>/style.css'
           }
         }
