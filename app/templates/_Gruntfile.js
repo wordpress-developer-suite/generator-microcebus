@@ -14,7 +14,10 @@ module.exports = function (grunt) {
           options: {
               sourceMap: false,
               outputStyle: 'expanded',
-              includePaths: ['<%%= vendor %>/foundation/scss']
+              includePaths: [
+                '<%= vendor %>',
+                '<%= vendor %>/foundation/scss'
+              ]
           },
           dist: {
             files: [{
@@ -56,9 +59,17 @@ module.exports = function (grunt) {
       // JS | Concat js files
       concat: {
         dist: {
-          src: ['<%%= vendor %>/jquery/dist/jquery.js',
-                '<%%= vendor %>/fastclick/lib/fastclick.js',
+          src: [
+                // jQuery
+                '<%%= vendor %>/jquery/dist/jquery.js',
+
+                // Foundation (include components separately)
                 '<%%= vendor %>/foundation/js/foundation.js',
+
+                // Libraries
+                '<%%= vendor %>/fastclick/lib/fastclick.js',
+
+                // Custom functions
                 '<%%= app %>/assets/js/app.js'
                ],
           dest: '<%%= app %>/script.js',
@@ -118,20 +129,20 @@ module.exports = function (grunt) {
     // Development
     grunt.registerTask('serve', [
         'jshint',
+        'concat',
         'sass',
         'postcss',
-        'concat',
         'watch'
     ]);
 
     // Build
     grunt.registerTask('build', [
         'jshint',
+        'concat',
+        'uglify',
         'sass',
         'postcss',
-        'cssmin',
-        'concat',
-        'uglify'
+        'cssmin'
     ]);
 
     // Default
