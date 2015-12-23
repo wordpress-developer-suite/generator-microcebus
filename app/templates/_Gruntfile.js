@@ -48,11 +48,17 @@ module.exports = function (grunt) {
       },
 
       // Minify CSS
-      cssmin: {
-        target: {
-          files: {
-            '<%%= app %>/style.css': '<%%= app %>/style.css'
-          }
+      cssnano: {
+        options: {
+            sourcemap: true
+        },
+        dist: {
+            files: [{
+              expand: true,
+              cwd: '<%%= app %>/',
+              src: '*.css',
+              dest: '<%%= app %>/'
+          }]
         }
       },
 
@@ -142,7 +148,7 @@ module.exports = function (grunt) {
         'uglify',
         'sass',
         'postcss',
-        'cssmin'
+        'cssnano'
     ]);
 
     // Default
