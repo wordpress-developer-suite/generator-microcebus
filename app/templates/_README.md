@@ -7,7 +7,7 @@
 _(Requires [wp-cli](http://wp-cli.org/) to download WordPress)_
 ```
 $ git clone
-$ cd vested && wp core download
+$ cd <%= appSlug %> && wp core download
 $ npm install && bower install
 $ cd scripts && sh download-plugins.sh
 ```
@@ -29,7 +29,14 @@ $ sh db/pull.sh
 ```
 _(Run from top-level `wordpress/` directory.)_
 
+**4. Run through quick install in browser**
+
 ## Development
 ```
 $ grunt serve
+```
+
+## Deployment
+```
+$ grunt build
 ```
