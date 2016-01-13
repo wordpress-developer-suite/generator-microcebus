@@ -14,14 +14,17 @@ module.exports = function (grunt) {
           options: {
               sourceMap: false,
               outputStyle: 'expanded',
-              includePaths: ['<%%= vendor %>/foundation/scss']
+              includePaths: [
+                '<%= vendor %>',
+                '<%= vendor %>/foundation/scss'
+              ]
           },
           dist: {
             files: [{
               expand: true,
-              cwd: '<%%= app %>/assets/scss/',
+              cwd: '<%= app %>/assets/scss/',
               src: ['{,*/}*.scss'],
-              dest: '<%%= app %>/',
+              dest: '<%= app %>/',
               ext: '.css'
             }]
           }
@@ -31,34 +34,48 @@ module.exports = function (grunt) {
       postcss: {
         options: {
           processors: [
-            require('autoprefixer-core')({browsers: ['last 2 versions']})
+            require('autoprefixer')({browsers: ['last 2 versions', 'ie >= 9']})
           ]
         },
         dist: {
           files: [{
               expand: true,
-              cwd: '<%%= app %>/',
-              src: '{,*/}*.css',
-              dest: '<%%= app %>/'
+              cwd: '<%= app %>/',
+              src: '*.css',
+              dest: '<%= app %>/'
           }]
         }
       },
 
       // Minify CSS
-      cssmin: {
-        target: {
-          files: {
-            '<%%= app %>/style.css': '<%%= app %>/style.css'
-          }
+      cssnano: {
+        options: {
+            sourcemap: true
+        },
+        dist: {
+            files: [{
+              expand: true,
+              cwd: '<%= app %>/',
+              src: '*.css',
+              dest: '<%= app %>/'
+          }]
         }
       },
 
       // JS | Concat js files
       concat: {
         dist: {
-          src: ['<%%= vendor %>/jquery/dist/jquery.js',
-                '<%%= vendor %>/fastclick/lib/fastclick.js',
+          src: [
+                // jQuery
+                '<%%= vendor %>/jquery/dist/jquery.js',
+
+                // Foundation (include components separately)
                 '<%%= vendor %>/foundation/js/foundation.js',
+
+                // Libraries
+                '<%%= vendor %>/fastclick/lib/fastclick.js',
+
+                // Custom functions
                 '<%%= app %>/assets/js/app.js'
                ],
           dest: '<%%= app %>/script.js',
@@ -118,20 +135,20 @@ module.exports = function (grunt) {
     // Development
     grunt.registerTask('serve', [
         'jshint',
+        'concat',
         'sass',
         'postcss',
-        'concat',
         'watch'
     ]);
 
     // Build
     grunt.registerTask('build', [
         'jshint',
+        'concat',
+        'uglify',
         'sass',
         'postcss',
-        'cssmin',
-        'concat',
-        'uglify'
+        'cssnano'
     ]);
 
     // Default
