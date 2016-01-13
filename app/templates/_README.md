@@ -33,7 +33,7 @@ _(Run from top-level `wordpress/` directory.)_
 
 **5. Fix permissions**
 
-Add to your wp-config.php to force the direct filesystem method
+Add this to your wp-config.php to force the direct filesystem method
 ```
 define('FS_METHOD', 'direct');
 ```
