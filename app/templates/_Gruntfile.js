@@ -22,9 +22,9 @@ module.exports = function (grunt) {
           dist: {
             files: [{
               expand: true,
-              cwd: '<%%= app %>/assets/scss/',
+              cwd: '<%= app %>/assets/scss/',
               src: ['{,*/}*.scss'],
-              dest: '<%%= app %>/',
+              dest: '<%= app %>/',
               ext: '.css'
             }]
           }
@@ -40,9 +40,9 @@ module.exports = function (grunt) {
         dist: {
           files: [{
               expand: true,
-              cwd: '<%%= app %>/',
+              cwd: '<%= app %>/',
               src: '*.css',
-              dest: '<%%= app %>/'
+              dest: '<%= app %>/'
           }]
         }
       },
@@ -55,9 +55,9 @@ module.exports = function (grunt) {
         dist: {
             files: [{
               expand: true,
-              cwd: '<%%= app %>/',
+              cwd: '<%= app %>/',
               src: '*.css',
-              dest: '<%%= app %>/'
+              dest: '<%= app %>/'
           }]
         }
       },
