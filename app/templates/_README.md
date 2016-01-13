@@ -32,6 +32,7 @@ _(Run from top-level `wordpress/` directory.)_
 **4. Run through quick install in browser**
 
 **5. Fix Permissions**
+
 Add to your wp-config.php to force the direct filesystem method
 ```
 define('FS_METHOD', 'direct');
