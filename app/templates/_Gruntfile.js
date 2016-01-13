@@ -135,14 +135,12 @@ module.exports = function (grunt) {
       concat: {
         dist: {
           src: [
-                // jQuery
-                '<%= vendor %>/jquery/dist/jquery.js',
-
-                // Foundation (include components separately)
-                '<%= vendor %>/foundation/js/foundation.js',
-
                 // Libraries
+                '<%= vendor %>/jquery/dist/jquery.js',
                 '<%= vendor %>/fastclick/lib/fastclick.js',
+
+                  // include Foundation components separately
+                '<%= vendor %>/foundation/js/foundation.js',
 
                 // Custom functions
                 '<%= app %>/assets/js/app.js'
