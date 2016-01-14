@@ -255,14 +255,6 @@ Generator.prototype.writing = {
       this.destinationPath('.editorconfig')
     );
     this.fs.copy(
-      this.templatePath('jshintrc'),
-      this.destinationPath('.jshintrc')
-    );
-    this.fs.copy(
-      this.templatePath('Gemfile'),
-      this.destinationPath('Gemfile')
-    );
-    this.fs.copy(
       this.templatePath('plugins'),
       this.destinationPath('plugins')
     );

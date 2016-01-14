@@ -18,16 +18,16 @@ module.exports = function (grunt) {
               sourceMap: false,
               outputStyle: 'expanded',
               includePaths: [
-                '<%= vendor %>',
-                '<%= vendor %>/foundation/scss'
+                '<%%= vendor %>',
+                '<%%= vendor %>/foundation/scss'
               ]
           },
           dist: {
             files: [{
               expand: true,
-              cwd: '<%= app %>/assets/scss/',
+              cwd: '<%%= app %>/assets/scss/',
               src: ['{,*/}*.scss'],
-              dest: '<%= app %>/',
+              dest: '<%%= app %>/',
               ext: '.css'
             }]
           }
@@ -52,9 +52,9 @@ module.exports = function (grunt) {
           },
           files: [{
               expand: true,
-              cwd: '<%= app %>/',
+              cwd: '<%%= app %>/',
               src: '*.css',
-              dest: '<%= app %>/'
+              dest: '<%%= app %>/'
           }]
         },
         dist: {
@@ -72,9 +72,9 @@ module.exports = function (grunt) {
           },
           files: [{
               expand: true,
-              cwd: '<%= app %>/',
+              cwd: '<%%= app %>/',
               src: '*.css',
-              dest: '<%= app %>/'
+              dest: '<%%= app %>/'
           }]
         }
       },
@@ -110,7 +110,7 @@ module.exports = function (grunt) {
             'Gruntfile.js',
           ],
           scripts: [
-            '<%= app %>/assets/js/app.js'
+            '<%%= app %>/assets/js/app.js'
           ]
       },
 
@@ -120,10 +120,10 @@ module.exports = function (grunt) {
        */
       jsdoc : {
         options: {
-            destination: '<%= app %>/assets/docs/js'
+            destination: '<%%= app %>/assets/docs/js'
         },
         dist : {
-            src: '<%= app %>/assets/js/**/*.js'
+            src: '<%%= app %>/assets/js/**/*.js'
         }
       },
 
@@ -135,16 +135,16 @@ module.exports = function (grunt) {
         dist: {
           src: [
                 // Libraries
-                '<%= vendor %>/jquery/dist/jquery.js',
-                '<%= vendor %>/fastclick/lib/fastclick.js',
+                '<%%= vendor %>/jquery/dist/jquery.js',
+                '<%%= vendor %>/fastclick/lib/fastclick.js',
 
                   // include Foundation components separately
-                '<%= vendor %>/foundation/js/foundation.js',
+                '<%%= vendor %>/foundation/js/foundation.js',
 
                 // Custom functions
-                '<%= app %>/assets/js/app.js'
+                '<%%= app %>/assets/js/app.js'
                ],
-          dest: '<%= app %>/script.js',
+          dest: '<%%= app %>/script.js',
         },
       },
 
@@ -159,7 +159,7 @@ module.exports = function (grunt) {
         },
         dist: {
           files: {
-            '<%= app %>/script.js': ['<%= app %>/script.js']
+            '<%%= app %>/script.js': ['<%%= app %>/script.js']
           }
         }
       },
@@ -173,18 +173,18 @@ module.exports = function (grunt) {
           livereload: 35729
         },
         sass: {
-          files: '<%= app %>/assets/scss/**/*.scss',
+          files: '<%%= app %>/assets/scss/**/*.scss',
           tasks: ['sass', 'postcss:serve']
         },
         php: {
-          files: ['<%= app %>/**/*.php']
+          files: ['<%%= app %>/**/*.php']
         },
         gruntfile: {
           files: 'Gruntfile.js',
           tasks: ['jshint:grunt']
         },
         scripts: {
-          files: '<%= app %>/assets/js/app.js',
+          files: '<%%= app %>/assets/js/app.js',
           tasks: ['jshint:scripts', 'concat']
         }
       }
