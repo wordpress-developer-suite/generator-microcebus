@@ -243,11 +243,6 @@ Generator.prototype.writing = {
       userinfo
     );
     this.fs.copyTpl(
-      this.templatePath('_hologram_config.yml'),
-      this.destinationPath('hologram_config.yml'),
-      userinfo
-    );
-    this.fs.copyTpl(
       this.templatePath('_Gruntfile.js'),
       this.destinationPath('Gruntfile.js'),
       userinfo
