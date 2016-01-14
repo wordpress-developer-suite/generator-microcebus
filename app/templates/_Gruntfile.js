@@ -104,9 +104,9 @@ module.exports = function (grunt) {
             strict: true,
             trailing: true,
             smarttabs: true,
-            "globals": {
-              "jQuery": false,
-              "$": false
+            globals: {
+              'jQuery': false,
+              '$': false
             }
           },
           grunt: [
