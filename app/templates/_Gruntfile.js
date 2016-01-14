@@ -219,8 +219,7 @@ module.exports = function (grunt) {
         'concat',
         'uglify',
         'sass',
-        'postcss:dist',
-        'cssnano'
+        'postcss:dist'
     ]);
 
     // Docs
