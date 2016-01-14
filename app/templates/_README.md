@@ -31,6 +31,11 @@ _(Run from top-level `wordpress/` directory.)_
 
 **4. Run through quick install in browser**
 
+## Development
+```
+$ grunt serve
+```
+
 **5. Fix permissions (if using AMP stack)**
 
 Add this to your wp-config.php to force the direct filesystem method
@@ -45,12 +50,8 @@ function wp_permissions() {
 ```
 Run wp_permissions function in command line on the wordpress directory
 
-## Development
-```
-$ grunt serve
-```
-
 ## Deployment
 ```
 $ grunt build
 ```
+
