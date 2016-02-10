@@ -258,6 +258,10 @@ Generator.prototype.writing = {
       this.templatePath('plugins'),
       this.destinationPath('plugins')
     );
+    this.fs.copy(
+      this.templatePath('scripts/'),
+      this.destinationPath('scripts/')
+    );
   }
 };
 
