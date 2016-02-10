@@ -238,7 +238,7 @@ module.exports = function (grunt) {
         'uglify',
         'sass',
         'postcss:dist',
-        'imagemin'
+        'newer:imagemin'
     ]);
 
     // Docs
