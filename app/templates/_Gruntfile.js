@@ -177,6 +177,24 @@ module.exports = function (grunt) {
       },
 
       /*
+       * Imagemin: Minify image files
+       * https://github.com/gruntjs/grunt-contrib-imagemin
+       */
+      imagemin: {
+        options: {
+          optimizationLevel: 4
+        }, 
+        dynamic: {
+          files: [{
+            expand: true,                 
+            cwd: '<%= app %>/assets/images/',        
+            src: ['**/*.{png,jpg,jpeg,gif}'],   
+            dest: '<%= app %>/assets/images/'                
+          }]
+        }
+      },
+
+      /*
        * Watch: Run tasks whenever watched files change
        * https://github.com/gruntjs/grunt-contrib-watch
        */
@@ -219,7 +237,8 @@ module.exports = function (grunt) {
         'concat',
         'uglify',
         'sass',
-        'postcss:dist'
+        'postcss:dist',
+        'imagemin'
     ]);
 
     // Docs
