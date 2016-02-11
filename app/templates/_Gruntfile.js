@@ -4,6 +4,7 @@ module.exports = function (grunt) {
 
     require('jit-grunt')(grunt);
     require('time-grunt')(grunt);
+    var svgo = require('imagemin-svgo');
 
     grunt.initConfig({
       app: 'wp-content/themes/<%= appSlug %>',
@@ -166,13 +167,14 @@ module.exports = function (grunt) {
        */
       imagemin: {
         options: {
-          optimizationLevel: 5
+          optimizationLevel: 5,
+          use: [svgo()]
         }, 
         dynamic: {
           files: [{
             expand: true,                 
             cwd: '<%%= app %>/assets/images/',        
-            src: ['**/*.{png,jpg,jpeg,gif}'],   
+            src: ['**/*.{png,jpg,jpeg,gif,svg}'],   
             dest: '<%%= app %>/assets/images/'                
           }]
         }
