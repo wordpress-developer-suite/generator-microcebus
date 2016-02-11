@@ -38,7 +38,15 @@ module.exports = function (grunt) {
        * https://github.com/nDmitry/grunt-postcss
        */
       postcss: {
-        serve: {
+        options: {
+          files: [{
+              expand: true,
+              cwd: '<%%= app %>/',
+              src: '*.css',
+              dest: '<%%= app %>/'
+          }]
+        },
+        prefix: {
           options: {
             processors: [
               /* 
@@ -49,33 +57,18 @@ module.exports = function (grunt) {
                 browsers: ['last 2 versions', 'ie >= 9']
               })
             ]
-          },
-          files: [{
-              expand: true,
-              cwd: '<%%= app %>/',
-              src: '*.css',
-              dest: '<%%= app %>/'
-          }]
+          }
         },
-        dist: {
+        minify: {
           options: {
             processors: [
-              require('autoprefixer')({
-                browsers: ['last 2 versions', 'ie >= 9']
-              }),
               /* 
                * CSS Nano: Modular minifier
                * https://github.com/ben-eb/cssnano
                */
               require('cssnano')()
             ]
-          },
-          files: [{
-              expand: true,
-              cwd: '<%%= app %>/',
-              src: '*.css',
-              dest: '<%%= app %>/'
-          }]
+          }
         }
       },
 
@@ -173,7 +166,7 @@ module.exports = function (grunt) {
        */
       imagemin: {
         options: {
-          optimizationLevel: 4
+          optimizationLevel: 5
         }, 
         dynamic: {
           files: [{
@@ -195,7 +188,7 @@ module.exports = function (grunt) {
         },
         sass: {
           files: '<%%= app %>/assets/scss/**/*.scss',
-          tasks: ['sass', 'postcss:serve']
+          tasks: ['sass', 'postcss:prefix']
         },
         php: {
           files: ['<%%= app %>/**/*.php']
@@ -217,7 +210,7 @@ module.exports = function (grunt) {
         'jshint',
         'concat',
         'sass',
-        'postcss:serve',
+        'postcss:prefix',
         'watch'
     ]);
 
@@ -228,7 +221,8 @@ module.exports = function (grunt) {
         'concat',
         'uglify',
         'sass',
-        'postcss:dist',
+        'postcss:prefix',
+        'postcss:minify',
         'newer:imagemin'
     ]);
 
