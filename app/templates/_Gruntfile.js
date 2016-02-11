@@ -67,16 +67,7 @@ module.exports = function (grunt) {
                * CSS Nano: Modular minifier
                * https://github.com/ben-eb/cssnano
                */
-              require('cssnano')(),
-
-              /* 
-               * Style Guide: Generate a style guide automatically
-               * https://github.com/morishitter/postcss-style-guide
-               */
-              require('postcss-style-guide')({
-                  name: '<%= appSlug %>',
-                  dir: '<%%= app %>/assets/docs/css'
-              })
+              require('cssnano')()
             ]
           },
           files: [{
