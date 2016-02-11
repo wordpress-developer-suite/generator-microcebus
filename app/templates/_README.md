@@ -36,7 +36,22 @@ _(Run from top-level `wordpress/` directory.)_
 $ grunt serve
 ```
 
+**5. Fix permissions (if using AMP stack)**
+
+Add this to your wp-config.php to force the direct filesystem method
+```
+define('FS_METHOD', 'direct');
+```
+Add this to your bash profile if it's not already there
+```
+function wp_permissions() {
+  sudo chown -R :_www "$1" && sudo chmod -R g+w "$1"
+}
+```
+Run wp_permissions function in command line on the wordpress directory
+
 ## Deployment
 ```
 $ grunt build
 ```
+

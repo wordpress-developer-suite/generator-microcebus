@@ -243,11 +243,6 @@ Generator.prototype.writing = {
       userinfo
     );
     this.fs.copyTpl(
-      this.templatePath('_hologram_config.yml'),
-      this.destinationPath('hologram_config.yml'),
-      userinfo
-    );
-    this.fs.copyTpl(
       this.templatePath('_Gruntfile.js'),
       this.destinationPath('Gruntfile.js'),
       userinfo
@@ -260,16 +255,12 @@ Generator.prototype.writing = {
       this.destinationPath('.editorconfig')
     );
     this.fs.copy(
-      this.templatePath('jshintrc'),
-      this.destinationPath('.jshintrc')
-    );
-    this.fs.copy(
-      this.templatePath('Gemfile'),
-      this.destinationPath('Gemfile')
-    );
-    this.fs.copy(
       this.templatePath('plugins'),
       this.destinationPath('plugins')
+    );
+    this.fs.copy(
+      this.templatePath('scripts/'),
+      this.destinationPath('scripts/')
     );
   }
 };
