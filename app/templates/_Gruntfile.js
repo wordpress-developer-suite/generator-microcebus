@@ -39,15 +39,7 @@ module.exports = function (grunt) {
        * https://github.com/nDmitry/grunt-postcss
        */
       postcss: {
-        options: {
-          files: [{
-              expand: true,
-              cwd: '<%%= app %>/',
-              src: '*.css',
-              dest: '<%%= app %>/'
-          }]
-        },
-        prefix: {
+        serve: {
           options: {
             processors: [
               /* 
@@ -58,18 +50,33 @@ module.exports = function (grunt) {
                 browsers: ['last 2 versions', 'ie >= 9']
               })
             ]
-          }
+          },
+          files: [{
+              expand: true,
+              cwd: '<%%= app %>/',
+              src: '*.css',
+              dest: '<%%= app %>/'
+          }]
         },
-        minify: {
+        dist: {
           options: {
             processors: [
+              require('autoprefixer')({
+                browsers: ['last 2 versions', 'ie >= 9']
+              }),
               /* 
                * CSS Nano: Modular minifier
                * https://github.com/ben-eb/cssnano
                */
               require('cssnano')()
             ]
-          }
+          },
+          files: [{
+              expand: true,
+              cwd: '<%%= app %>/',
+              src: '*.css',
+              dest: '<%%= app %>/'
+          }]
         }
       },
 
@@ -190,7 +197,7 @@ module.exports = function (grunt) {
         },
         sass: {
           files: '<%%= app %>/assets/scss/**/*.scss',
-          tasks: ['sass', 'postcss:prefix']
+          tasks: ['sass', 'postcss:serve']
         },
         php: {
           files: ['<%%= app %>/**/*.php']
@@ -212,7 +219,7 @@ module.exports = function (grunt) {
         'jshint',
         'concat',
         'sass',
-        'postcss:prefix',
+        'postcss:serve',
         'watch'
     ]);
 
@@ -223,8 +230,7 @@ module.exports = function (grunt) {
         'concat',
         'uglify',
         'sass',
-        'postcss:prefix',
-        'postcss:minify',
+        'postcss:dist',
         'newer:imagemin'
     ]);
 
