@@ -61,12 +61,6 @@ $ yo microcebus
 ```
 _*Make sure MySQL is started and the database username and password exist, otherwise WP CLI will choke during installation._
 
-Install additional ruby dependencies
-```
-$ bundle
-```
-_*Or `gem install hologram` (if you don't have bundler installed.)_
-
 ## Note
 Only tested on OSX
 
