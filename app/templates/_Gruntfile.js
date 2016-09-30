@@ -4,12 +4,16 @@ module.exports = function (grunt) {
 
     require('jit-grunt')(grunt);
     require('time-grunt')(grunt);
+    var svgo = require('imagemin-svgo');
 
     grunt.initConfig({
       app: 'wp-content/themes/<%= appSlug %>',
       vendor: 'wp-content/themes/<%= appSlug %>/assets/vendor',
 
-      // CSS | Process SCSS files
+      /*
+       * grunt-sass: Compile Sass to CSS using node-sass
+       * https://github.com/sindresorhus/grunt-sass
+       */
       sass: {
           options: {
               sourceMap: false,
@@ -27,58 +31,117 @@ module.exports = function (grunt) {
           }
       },
 
-      // Add vendor prefixes
+      /*
+       * PostCSS: CSS Transformer via JS plugins
+       * https://github.com/nDmitry/grunt-postcss
+       */
       postcss: {
-        options: {
-          processors: [
-            require('autoprefixer-core')({browsers: ['last 2 versions']})
-          ]
-        },
-        dist: {
+        serve: {
+          options: {
+            processors: [
+              /*
+               * Autoprefixer: Add vendor prefixes using caniuse.com
+               * https://github.com/postcss/autoprefixer
+               */
+              require('autoprefixer')({
+                browsers: ['last 2 versions', 'ie >= 8', 'safari >= 6', 'and_chr >= 2.3']
+              })
+            ]
+          },
           files: [{
               expand: true,
-              cwd: '<%%= app %>/',
-              src: '{,*/}*.css',
-              dest: '<%%= app %>/'
+              cwd: '<%= app %>/',
+              src: '*.css',
+              dest: '<%= app %>/'
+          }]
+        },
+        dist: {
+          options: {
+            processors: [
+              require('autoprefixer')({
+                browsers: ['last 2 versions', 'ie >= 8', 'safari >= 6', 'and_chr >= 2.3']
+              }),
+              /*
+               * CSS Nano: Modular minifier
+               * https://github.com/ben-eb/cssnano
+               */
+              require('cssnano')()
+            ]
+          },
+          files: [{
+              expand: true,
+              cwd: '<%= app %>/',
+              src: '*.css',
+              dest: '<%= app %>/'
           }]
         }
       },
 
-      // Minify CSS
-      cssmin: {
-        target: {
-          files: {
-            '<%%= app %>/style.css': '<%%= app %>/style.css'
-          }
-        }
-      },
 
-      // JS | Concat js files
-      concat: {
-        dist: {
-          src: ['<%%= vendor %>/jquery/dist/jquery.js',
-                '<%%= vendor %>/fastclick/lib/fastclick.js',
-                '<%%= vendor %>/foundation/js/foundation.js',
-                '<%%= app %>/assets/js/app.js'
-               ],
-          dest: '<%%= app %>/script.js',
-        },
-      },
-
-      // Check js files for errors
+      /*
+       * JSHint: Validate JavaScript files
+       * https://github.com/gruntjs/grunt-contrib-jshint
+       */
       jshint: {
           options: {
-            jshintrc: '.jshintrc'
+            "node": true,
+            "curly": true,
+            "eqnull": true,
+            "eqeqeq": true,
+            "undef": true,
+            "unused": false,
+            "indent": 4,
+            "trailing": true,
+            "browser": true,
+            "devel": true,
+            "strict": true,
+            "quotmark": "single",
+            "globals": {
+                "jQuery": false,
+                "$": false
+            }
           },
           grunt: [
             'Gruntfile.js',
           ],
           scripts: [
-            '<%%= app %>/assets/js/app.js'
+            '<%= app %>/assets/js/app.js'
           ]
       },
 
-      // Minify js files
+      /*
+       * JSDoc: Generate JS documentation
+       * https://github.com/gruntjs/grunt-contrib-concat
+       */
+      jsdoc : {
+        options: {
+          destination: '<%= app %>/assets/docs/js'
+        },
+        dist : {
+          src: '<%= app %>/assets/js/**/*.js'
+        }
+      },
+
+      /*
+       * Concat: Concatenate JS files
+       * https://github.com/gruntjs/grunt-contrib-concat
+       */
+      concat: {
+        dist: {
+          src: [
+            '<%%= vendor %>/jquery/dist/jquery.js',
+            '<%%= vendor %>/fastclick/lib/fastclick.js',
+            '<%%= vendor %>/foundation/js/foundation.js',
+            '<%%= app %>/assets/js/app.js'
+            ],
+          dest: '<%%= app %>/script.js',
+        },
+      },
+
+      /*
+       * Uglify: Minify JS files
+       * https://github.com/gruntjs/grunt-contrib-uglify
+       */
       uglify: {
         options: {
           preserveComments: false,
@@ -91,14 +154,36 @@ module.exports = function (grunt) {
         }
       },
 
-      // Watch files for changes
+      /*
+       * Imagemin: Minify image files
+       * https://github.com/gruntjs/grunt-contrib-imagemin
+       */
+      imagemin: {
+        options: {
+          optimizationLevel: 5,
+          use: [svgo()]
+        },
+        dynamic: {
+          files: [{
+            expand: true,
+            cwd: '<%= app %>/assets/images/',
+            src: ['**/*.{png,jpg,jpeg,gif,svg}'],
+            dest: '<%= app %>/assets/images/'
+          }]
+        }
+      },
+
+      /*
+       * Watch: Run tasks whenever watched files change
+       * https://github.com/gruntjs/grunt-contrib-watch
+       */
       watch: {
         options: {
           livereload: 35729
         },
         sass: {
           files: '<%%= app %>/assets/scss/**/*.scss',
-          tasks: ['sass', 'postcss']
+          tasks: ['sass', 'postcss:serve']
         },
         php: {
           files: ['<%%= app %>/**/*.php']
@@ -117,26 +202,30 @@ module.exports = function (grunt) {
 
     // Development
     grunt.registerTask('serve', [
-        'jshint',
-        'sass',
-        'postcss',
-        'concat',
-        'watch'
+      'jshint',
+      'concat',
+      'sass',
+      'postcss:serve',
+      'watch'
     ]);
 
     // Build
     grunt.registerTask('build', [
-        'jshint',
-        'sass',
-        'postcss',
-        'cssmin',
-        'concat',
-        'uglify'
+      'jshint',
+      'jsdoc',
+      'concat',
+      'uglify',
+      'sass',
+      'postcss:dist'
+    ]);
+
+    // Docs
+    grunt.registerTask('docs', [
+      'jsdoc',
     ]);
 
     // Default
     grunt.registerTask('default', [
-        'build',
+      'build',
     ]);
-
 };
