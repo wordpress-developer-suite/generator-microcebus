@@ -84,21 +84,21 @@ module.exports = function (grunt) {
        */
       jshint: {
           options: {
-            "node": true,
-            "curly": true,
-            "eqnull": true,
-            "eqeqeq": true,
-            "undef": true,
-            "unused": false,
-            "indent": 4,
-            "trailing": true,
-            "browser": true,
-            "devel": true,
-            "strict": true,
-            "quotmark": "single",
-            "globals": {
-                "jQuery": false,
-                "$": false
+            'node': true,
+            'curly': true,
+            'eqnull': true,
+            'eqeqeq': true,
+            'undef': true,
+            'unused': false,
+            'indent': 4,
+            'trailing': true,
+            'browser': true,
+            'devel': true,
+            'strict': true,
+            'quotmark': 'single',
+            'globals': {
+                'jQuery': false,
+                '$': false
             }
           },
           grunt: [
