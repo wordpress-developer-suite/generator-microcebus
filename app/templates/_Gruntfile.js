@@ -50,9 +50,9 @@ module.exports = function (grunt) {
           },
           files: [{
               expand: true,
-              cwd: '<%= app %>/',
+              cwd: '<%%= app %>/',
               src: '*.css',
-              dest: '<%= app %>/'
+              dest: '<%%= app %>/'
           }]
         },
         dist: {
@@ -70,9 +70,9 @@ module.exports = function (grunt) {
           },
           files: [{
               expand: true,
-              cwd: '<%= app %>/',
+              cwd: '<%%= app %>/',
               src: '*.css',
-              dest: '<%= app %>/'
+              dest: '<%%= app %>/'
           }]
         }
       },
@@ -105,7 +105,7 @@ module.exports = function (grunt) {
             'Gruntfile.js',
           ],
           scripts: [
-            '<%= app %>/assets/js/app.js'
+            '<%%= app %>/assets/js/app.js'
           ]
       },
 
@@ -115,10 +115,10 @@ module.exports = function (grunt) {
        */
       jsdoc : {
         options: {
-          destination: '<%= app %>/assets/docs/js'
+          destination: '<%%= app %>/assets/docs/js'
         },
         dist : {
-          src: '<%= app %>/assets/js/**/*.js'
+          src: '<%%= app %>/assets/js/**/*.js'
         }
       },
 
@@ -166,9 +166,9 @@ module.exports = function (grunt) {
         dynamic: {
           files: [{
             expand: true,
-            cwd: '<%= app %>/assets/images/',
+            cwd: '<%%= app %>/assets/images/',
             src: ['**/*.{png,jpg,jpeg,gif,svg}'],
-            dest: '<%= app %>/assets/images/'
+            dest: '<%%= app %>/assets/images/'
           }]
         }
       },
