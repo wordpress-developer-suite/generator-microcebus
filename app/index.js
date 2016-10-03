@@ -29,9 +29,10 @@ Generator.prototype.prompting = function(){
 
   var prompts = [
   {
+    type: 'input',
     name: 'githubUser',
     message: 'What\'s your GitHub username (for theme author info)?',
-    default: 'someuser'
+    store   : true
   },
   {
     type: 'input',
@@ -43,13 +44,7 @@ Generator.prototype.prompting = function(){
     type: 'input',
     name: 'themeURI',
     message: 'Theme Template GitHub Address',
-    default: 'https://github.com/ikayzo/_s.git'
-  },,
-  {
-    type: 'input',
-    name: 'themeName',
-    message: 'Theme Name',
-    default: helpers.capitalize(this.appname)
+    default: helpers.SETTINGS.DEFAULT_THEME_URI
   },
   {
     type: 'input',
@@ -72,7 +67,8 @@ Generator.prototype.prompting = function(){
   {
     type: 'input',
     name: 'dbUser',
-    message: 'Database User'
+    message: 'Database User',
+    store   : true
   },
   {
     type: 'password',
@@ -126,57 +122,61 @@ Generator.prototype.getWordPress = function(){
         this.log('Customizing theme files...');
       }).bind(this));
 
-      // Rename _s.pot language file
-      fs.rename(
-        themeDir + '/languages/_s.pot',
-        themeDir + '/languages/' + this.props.themeSlug + '.pot',
-        function(err) {
-        if ( err ) {
-          console.log('ERROR: ' + err);
-        }
-      });
+      // Update theme files if Underscores theme
+      if (themeURI === helpers.SETTINGS.DEFAULT_THEME_URI){
 
-      // Find/replace pattern for theme slug (ie. '_s')
-      // https://github.com/Automattic/_s#getting-started
-      replace({
-        regex: '\'_s\'',
-        replacement: '\'' + this.props.themeSlug + '\'',
-        paths: [themeDir],
-        recursive: true,
-        silent: true,
-      });
+        // Rename _s.pot language file
+        fs.rename(
+          themeDir + '/languages/_s.pot',
+          themeDir + '/languages/' + this.props.themeSlug + '.pot',
+          function(err) {
+          if ( err ) {
+            console.log('ERROR: ' + err);
+          }
+        });
 
-      replace({
-        regex: '_s_',
-        replacement: this.props.themeSlug + '_',
-        paths: [themeDir],
-        recursive: true,
-        silent: true,
-      });
+        // Find/replace pattern for theme slug (ie. '_s')
+        // https://github.com/Automattic/_s#getting-started
+        replace({
+          regex: '\'_s\'',
+          replacement: '\'' + this.props.themeSlug + '\'',
+          paths: [themeDir],
+          recursive: true,
+          silent: true,
+        });
 
-      replace({
-        regex: 'Text Domain: _s',
-        replacement: 'Text Domain: ' + this.props.themeSlug,
-        paths: [themeDir],
-        recursive: true,
-        silent: true,
-      });
+        replace({
+          regex: '_s_',
+          replacement: this.props.themeSlug + '_',
+          paths: [themeDir],
+          recursive: true,
+          silent: true,
+        });
 
-      replace({
-        regex: ' _s',
-        replacement: ' ' + this.props.themeName,
-        paths: [themeDir],
-        recursive: true,
-        silent: true,
-      });
+        replace({
+          regex: 'Text Domain: _s',
+          replacement: 'Text Domain: ' + this.props.themeSlug,
+          paths: [themeDir],
+          recursive: true,
+          silent: true,
+        });
 
-      replace({
-        regex: '_s-',
-        replacement: this.props.themeSlug + '-',
-        paths: [themeDir],
-        recursive: true,
-        silent: true,
-      });
+        replace({
+          regex: ' _s',
+          replacement: ' ' + this.props.themeName,
+          paths: [themeDir],
+          recursive: true,
+          silent: true,
+        });
+
+        replace({
+          regex: '_s-',
+          replacement: this.props.themeSlug + '-',
+          paths: [themeDir],
+          recursive: true,
+          silent: true,
+        });
+      }
     }).bind(this));
   }).bind(this);
 

@@ -2,6 +2,10 @@
 
 var helpers = helpers || {};
 
+helpers.SETTINGS = {
+  DEFAULT_THEME_URI: 'https://github.com/ikayzo/_s.git'
+};
+
 // Slugify text
 helpers.slugify = function(string){
   return string.toString().toLowerCase()
