@@ -8,6 +8,15 @@
     "email": "<%= authorEmail %>",
     "url": "<%= authorURL %>"
   },
+  "scripts": {
+    "start": "grunt serve",
+    "build": "grunt build",
+    "deploy": "git push && git push staging development",
+
+    "db-pull": "sh ./db/pull.sh",
+    "db-push": "sh ./db/push.sh",
+    "install-plugins": "cd scripts && sh download-plugins.sh && cd ../"
+  },
   "private": true,
   "devDependencies": {
     "autoprefixer": "^6.5.0",
