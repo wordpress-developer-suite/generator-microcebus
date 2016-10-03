@@ -20,7 +20,8 @@
   "scripts": {
     "test": "mocha --timeout 15000 --reporter spec",
     "preversion": "npm test",
-    "postversion": "git push --tags"
+    "postversion": "git push --tags",
+    "deploy": "git push"
   },
   "files": [
     "app"
