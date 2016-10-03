@@ -24,19 +24,33 @@ Generator.prototype.prompting = function(){
   var done = this.async();
 
   this.log(yosay(
-    'Welcome to the ' + chalk.red('Microcebus') + ' WordPress generator!'
+    'Welcome to the ' + chalk.blue('Microcebus') + ' WordPress generator!'
   ));
 
-  var prompts = [{
+  var prompts = [
+  {
     name: 'githubUser',
     message: 'What\'s your GitHub username (for theme author info)?',
     default: 'someuser'
-  },{
+  },
+  {
     type: 'input',
     name: 'themeName',
     message: 'Theme Name',
     default: helpers.capitalize(this.appname)
   },
+  {
+    type: 'input',
+    name: 'themeURI',
+    message: 'Theme Template GitHub Address',
+    default: 'https://github.com/ikayzo/_s.git'
+  },,
+  {
+    type: 'input',
+    name: 'themeName',
+    message: 'Theme Name',
+    default: helpers.capitalize(this.appname)
+  }
   {
     type: 'input',
     name: 'themeSlug',
@@ -89,7 +103,7 @@ Generator.prototype.configuring = function(){
 
 Generator.prototype.getWordPress = function(){
 
-  var themeURI = 'https://github.com/ikayzo/_s.git';
+  var themeURI = this.props.themeURI;
   var themeDir = './wp-content/themes/' + this.props.themeSlug;
 
   var config = {
@@ -105,7 +119,7 @@ Generator.prototype.getWordPress = function(){
     this.log('Cloning theme from ' + themeURI + ' ...');
 
     clone(themeURI, themeDir, (function(){
-      this.log('Removing theme .git submodule...');
+      //this.log('Removing theme .git submodule...');
 
       // Remove .git folder inside of theme
       rm(themeDir + '/.git', (function(){
