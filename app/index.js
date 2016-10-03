@@ -50,7 +50,7 @@ Generator.prototype.prompting = function(){
     name: 'themeName',
     message: 'Theme Name',
     default: helpers.capitalize(this.appname)
-  }
+  },
   {
     type: 'input',
     name: 'themeSlug',
