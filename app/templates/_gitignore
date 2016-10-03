@@ -22,10 +22,8 @@ node_modules
 !wp-content/
 !Gruntfile.js
 !package.json
-!Gemfile
 !bower.json
 !.bowerrc
-!.jshintrc
 !db/
 db/*
 !db/data.sql
@@ -51,4 +49,3 @@ wp-content/themes/*
 # Ignore everything in the "vendor" directory, except the vendor folders you
 # specify (see the commented-out example for a hint on how to do this.)
 wp-content/themes/<%= appSlug %>/assets/vendor/*
-!wp-content/themes/<%= appSlug %>/assets/vendor/hologram

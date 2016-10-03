@@ -10,9 +10,13 @@
 - [GruntJS](http://gruntjs.com/) for build task automation
   - [Sass](http://sass-lang.com/) for CSS preprocessing
   - [Autoprefixer](https://github.com/postcss/autoprefixer) for prefix-free CSS3
-  - [Watch](https://github.com/gruntjs/grunt-contrib-watch) for livereloading of CSS/JS assets
+  - [CSSNano](https://github.com/ben-eb/cssnano) for minifying CSS files
   - [JSHint](https://github.com/gruntjs/grunt-contrib-jshint) for JavaScript linting / validation
-- [Hologram](http://trulia.github.io/hologram/) for generating theme CSS style guides  
+  - [Concat](https://github.com/gruntjs/grunt-contrib-concat) for concatenating multiple JS files
+  - [Uglify](https://github.com/gruntjs/grunt-contrib-uglify) for minifying JS files
+  - [JSDoc](https://github.com/krampstudio/grunt-jsdoc) for generating JS documentation
+  - [Watch](https://github.com/gruntjs/grunt-contrib-watch) for livereloading of CSS/JS assets
+  - [ImageMin](https://github.com/gruntjs/grunt-contrib-imagemin) for minifying images
 
 Maintainer: [Mike King](https://github.com/micjamking)
 
@@ -26,11 +30,6 @@ $ curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.p
 $ chmod +x wp-cli.phar
 $ sudo mv wp-cli.phar /usr/local/bin/wp
 $ wp --info
-```
-- [Bundler](http://bundler.io/) for managing ruby dependencies (necessary evil to support [hologram style guides](http://trulia.github.io/hologram/))
-
-```
-$ gem install bundler
 ```
 
 ## Getting started
@@ -61,12 +60,6 @@ $ yo microcebus
 ? Database Password:
 ```
 _*Make sure MySQL is started and the database username and password exist, otherwise WP CLI will choke during installation._
-
-Install additional ruby dependencies
-```
-$ bundle
-```
-_*Or `gem install hologram` (if you don't have bundler installed.)_
 
 ## Note
 Only tested on OSX
