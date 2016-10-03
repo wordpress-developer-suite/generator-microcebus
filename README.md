@@ -18,7 +18,8 @@
   - [Watch](https://github.com/gruntjs/grunt-contrib-watch) for livereloading of CSS/JS assets
   - [ImageMin](https://github.com/gruntjs/grunt-contrib-imagemin) for minifying images
 
-Maintainer: [Mike King](https://github.com/micjamking)
+Maintainer: [@micjamking](https://github.com/micjamking)
+Contributors: [@nainoa](https://github.com/nainoa)
 
 ## Requirements
 [NodeJS](http://nodejs.org/) & [Yeoman](http://yeoman.io/) are obviously required. Additionally, this package requires the following packages:
