@@ -4,7 +4,6 @@ module.exports = function (grunt) {
 
     require('jit-grunt')(grunt);
     require('time-grunt')(grunt);
-    var svgo = require('imagemin-svgo');
 
     grunt.initConfig({
       app: 'wp-content/themes/<%= appSlug %>',
@@ -18,7 +17,10 @@ module.exports = function (grunt) {
           options: {
               sourceMap: false,
               outputStyle: 'expanded',
-              includePaths: ['<%%= vendor %>/foundation/scss']
+              includePaths: [
+                '<%%= vendor %>/foundation-sites/scss',
+                '<%%= vendor %>'
+              ]
           },
           dist: {
             files: [{
@@ -90,7 +92,7 @@ module.exports = function (grunt) {
             'eqeqeq': true,
             'undef': true,
             'unused': false,
-            'indent': 4,
+            'indent': 2,
             'trailing': true,
             'browser': true,
             'devel': true,
@@ -129,9 +131,11 @@ module.exports = function (grunt) {
       concat: {
         dist: {
           src: [
-            // '<%%= vendor %>/jquery/dist/jquery.js',
-            '<%%= vendor %>/fastclick/lib/fastclick.js',
-            '<%%= vendor %>/foundation/js/foundation.js',
+            // Foundation components
+            '<%= vendor %>/foundation-sites/js/foundation.core.js',
+            '<%= vendor %>/foundation-sites/js/foundation.util.mediaQuery.js',
+
+            // Custom functions
             '<%%= app %>/assets/js/app.js'
             ],
           dest: '<%%= app %>/script.js',
@@ -155,25 +159,6 @@ module.exports = function (grunt) {
       },
 
       /*
-       * Imagemin: Minify image files
-       * https://github.com/gruntjs/grunt-contrib-imagemin
-       */
-      imagemin: {
-        options: {
-          optimizationLevel: 5,
-          use: [svgo()]
-        },
-        dynamic: {
-          files: [{
-            expand: true,
-            cwd: '<%%= app %>/assets/images/',
-            src: ['**/*.{png,jpg,jpeg,gif,svg}'],
-            dest: '<%%= app %>/assets/images/'
-          }]
-        }
-      },
-
-      /*
        * Watch: Run tasks whenever watched files change
        * https://github.com/gruntjs/grunt-contrib-watch
        */
@@ -193,7 +178,7 @@ module.exports = function (grunt) {
           tasks: ['jshint:grunt']
         },
         scripts: {
-          files: '<%%= app %>/assets/js/app.js',
+          files: '<%%= app %>/assets/js/**/*.js',
           tasks: ['jshint:scripts', 'concat']
         }
       }

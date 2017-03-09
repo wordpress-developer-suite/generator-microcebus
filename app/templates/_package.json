@@ -8,20 +8,29 @@
     "email": "<%= authorEmail %>",
     "url": "<%= authorURL %>"
   },
+  "scripts": {
+    "setup": "wp core download && npm install && bower install && npm run install-wp-plugins",
+    "start": "grunt serve",
+    "build": "grunt build",
+    "deploy": "git push origin development",
+
+    "db-pull": "sh ./db/pull.sh",
+    "db-push": "sh ./db/push.sh",
+    "install-wp-plugins": "sh ./scripts/download-plugins.sh",
+    "install-db-sync": "cd ./db/ && git clone git@github.com:micjamking/wordpress-db-sync.git && cp -R wordpress-db-sync/* ./ && rm -rf wordpress-db-sync/"
+  },
   "private": true,
   "devDependencies": {
-    "autoprefixer": "^6.5.0",
-    "cssnano": "^3.7.5",
+    "autoprefixer": "^6.7.6",
+    "cssnano": "^3.10.0",
     "grunt": "^1.0.1",
     "grunt-contrib-concat": "^1.0.1",
-    "grunt-contrib-imagemin": "^1.0.1",
-    "grunt-contrib-jshint": "^1.0.0",
-    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-uglify": "^2.2.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-jsdoc": "^2.1.0",
     "grunt-postcss": "^0.8.0",
-    "grunt-sass": "^1.2.1",
-    "imagemin-svgo": "^5.2.0",
+    "grunt-sass": "^2.0.0",
     "jit-grunt": "^0.10.0",
     "time-grunt": "^1.4.0"
   }
