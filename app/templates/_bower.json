@@ -10,6 +10,6 @@
   },
   "private": true,
   "dependencies": {
-    "foundation-sites": "latest",
+    "foundation-sites": "latest"
   }
 }
