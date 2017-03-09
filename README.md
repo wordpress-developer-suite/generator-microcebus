@@ -6,7 +6,7 @@
 ## Features
 
 - A [modified version](https://github.com/ikayzo/_s) of [\_s \(underscores\)](https://github.com/automattic/_s) WordPress starter theme
-- [Foundation framework](http://foundation.zurb.com/) for responsive web design
+- [Foundation framework](http://foundation.zurb.com/sites/docs/) for responsive web design
 - [GruntJS](http://gruntjs.com/) for build task automation
   - [Sass](http://sass-lang.com/) for CSS preprocessing
   - [Autoprefixer](https://github.com/postcss/autoprefixer) for prefix-free CSS3
@@ -16,7 +16,6 @@
   - [Uglify](https://github.com/gruntjs/grunt-contrib-uglify) for minifying JS files
   - [JSDoc](https://github.com/krampstudio/grunt-jsdoc) for generating JS documentation
   - [Watch](https://github.com/gruntjs/grunt-contrib-watch) for livereloading of CSS/JS assets
-  - [ImageMin](https://github.com/gruntjs/grunt-contrib-imagemin) for minifying images
 
 Maintainer: [Mike King](https://github.com/micjamking)
 
