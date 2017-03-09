@@ -132,8 +132,8 @@ module.exports = function (grunt) {
         dist: {
           src: [
             // Foundation components
-            '<%= vendor %>/foundation-sites/js/foundation.core.js',
-            '<%= vendor %>/foundation-sites/js/foundation.util.mediaQuery.js',
+            '<%%= vendor %>/foundation-sites/js/foundation.core.js',
+            '<%%= vendor %>/foundation-sites/js/foundation.util.mediaQuery.js',
 
             // Custom functions
             '<%%= app %>/assets/js/app.js'
