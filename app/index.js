@@ -24,18 +24,27 @@ Generator.prototype.prompting = function(){
   var done = this.async();
 
   this.log(yosay(
-    'Welcome to the ' + chalk.red('Microcebus') + ' WordPress generator!'
+    'Welcome to the ' + chalk.blue('Microcebus') + ' WordPress generator!'
   ));
 
-  var prompts = [{
+  var prompts = [
+  {
+    type: 'input',
     name: 'githubUser',
     message: 'What\'s your GitHub username (for theme author info)?',
-    default: 'someuser'
-  },{
+    store   : true
+  },
+  {
     type: 'input',
     name: 'themeName',
     message: 'Theme Name',
     default: helpers.capitalize(this.appname)
+  },
+  {
+    type: 'input',
+    name: 'themeURI',
+    message: 'Theme Template GitHub Address',
+    default: helpers.SETTINGS.DEFAULT_THEME_URI
   },
   {
     type: 'input',
@@ -58,7 +67,8 @@ Generator.prototype.prompting = function(){
   {
     type: 'input',
     name: 'dbUser',
-    message: 'Database User'
+    message: 'Database User',
+    store   : true
   },
   {
     type: 'password',
@@ -89,7 +99,7 @@ Generator.prototype.configuring = function(){
 
 Generator.prototype.getWordPress = function(){
 
-  var themeURI = 'https://github.com/ikayzo/_s.git';
+  var themeURI = this.props.themeURI;
   var themeDir = './wp-content/themes/' + this.props.themeSlug;
 
   var config = {
@@ -105,64 +115,68 @@ Generator.prototype.getWordPress = function(){
     this.log('Cloning theme from ' + themeURI + ' ...');
 
     clone(themeURI, themeDir, (function(){
-      this.log('Removing theme .git submodule...');
+      //this.log('Removing theme .git submodule...');
 
       // Remove .git folder inside of theme
       rm(themeDir + '/.git', (function(){
         this.log('Customizing theme files...');
       }).bind(this));
 
-      // Rename _s.pot language file
-      fs.rename(
-        themeDir + '/languages/_s.pot',
-        themeDir + '/languages/' + this.props.themeSlug + '.pot',
-        function(err) {
-        if ( err ) {
-          console.log('ERROR: ' + err);
-        }
-      });
+      // Update theme files if Underscores theme
+      if (themeURI === helpers.SETTINGS.DEFAULT_THEME_URI){
 
-      // Find/replace pattern for theme slug (ie. '_s')
-      // https://github.com/Automattic/_s#getting-started
-      replace({
-        regex: '\'_s\'',
-        replacement: '\'' + this.props.themeSlug + '\'',
-        paths: [themeDir],
-        recursive: true,
-        silent: true,
-      });
+        // Rename _s.pot language file
+        fs.rename(
+          themeDir + '/languages/_s.pot',
+          themeDir + '/languages/' + this.props.themeSlug + '.pot',
+          function(err) {
+          if ( err ) {
+            console.log('ERROR: ' + err);
+          }
+        });
 
-      replace({
-        regex: '_s_',
-        replacement: this.props.themeSlug + '_',
-        paths: [themeDir],
-        recursive: true,
-        silent: true,
-      });
+        // Find/replace pattern for theme slug (ie. '_s')
+        // https://github.com/Automattic/_s#getting-started
+        replace({
+          regex: '\'_s\'',
+          replacement: '\'' + this.props.themeSlug + '\'',
+          paths: [themeDir],
+          recursive: true,
+          silent: true,
+        });
 
-      replace({
-        regex: 'Text Domain: _s',
-        replacement: 'Text Domain: ' + this.props.themeSlug,
-        paths: [themeDir],
-        recursive: true,
-        silent: true,
-      });
+        replace({
+          regex: '_s_',
+          replacement: this.props.themeSlug + '_',
+          paths: [themeDir],
+          recursive: true,
+          silent: true,
+        });
 
-      replace({
-        regex: ' _s',
-        replacement: ' ' + this.props.themeName,
-        paths: [themeDir],
-        recursive: true,
-        silent: true,
-      });
+        replace({
+          regex: 'Text Domain: _s',
+          replacement: 'Text Domain: ' + this.props.themeSlug,
+          paths: [themeDir],
+          recursive: true,
+          silent: true,
+        });
 
-      replace({
-        regex: '_s-',
-        replacement: this.props.themeSlug + '-',
-        paths: [themeDir],
-        recursive: true,
-        silent: true,
-      });
+        replace({
+          regex: ' _s',
+          replacement: ' ' + this.props.themeName,
+          paths: [themeDir],
+          recursive: true,
+          silent: true,
+        });
+
+        replace({
+          regex: '_s-',
+          replacement: this.props.themeSlug + '-',
+          paths: [themeDir],
+          recursive: true,
+          silent: true,
+        });
+      }
     }).bind(this));
   }).bind(this);
 
