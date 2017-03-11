@@ -11,7 +11,7 @@ $ cd <%= appSlug %> && npm run setup
 ```
 
 **Plugins required** (installed via `npm run setup`)
-- Advanced Custom Fields Pro (included in the modified Underscores theme)
+- Advanced Custom Fields (included in the modified Underscores theme)
 - Custom Post Type UI
 - User Role Editor
 
@@ -21,7 +21,9 @@ $ cd <%= appSlug %> && npm run setup
 
 **2. Install [wordpress-db-sync](https://github.com/micjamking/wordpress-db-sync)**
 ```
-$ npm run install-db-sync
+$ cd db/ && git clone git@github.com:micjamking/wordpress-db-sync.git
+$ cp -R wordpress-db-sync/* ./
+$ rm -rf wordpress-db-sync/
 ```
 **3. Configure pull.sh, push.sh, & update.sql with your database name, user, and password**
 - See [usage instructions](https://github.com/micjamking/wordpress-db-sync#usage) for wordpress-db-sync for more details
