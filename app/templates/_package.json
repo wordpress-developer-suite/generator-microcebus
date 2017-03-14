@@ -22,8 +22,10 @@
   "private": true,
   "devDependencies": {
     "autoprefixer": "*",
+    "babel-preset-es2015": "*",
     "cssnano": "*",
     "grunt": "*",
+    "grunt-babel": "*",
     "grunt-contrib-concat": "*",
     "grunt-contrib-jshint": "*",
     "grunt-contrib-uglify": "*",

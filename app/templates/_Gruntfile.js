@@ -142,6 +142,24 @@ module.exports = function (grunt) {
         },
       },
 
+
+      /*
+       * Babel: JavaScript compiler
+       * https://github.com/babel/grunt-babel
+       */
+      babel: {
+        options: {
+          sourceMap: true,
+          presets: ['es2015']
+        },
+        dist: {
+          files: {
+            '<%%= app %>/script.js': '<%%= app %>/script.js'
+          }
+        }
+      },
+
+
       /*
        * Uglify: Minify JS files
        * https://github.com/gruntjs/grunt-contrib-uglify
@@ -179,7 +197,7 @@ module.exports = function (grunt) {
         },
         scripts: {
           files: '<%%= app %>/assets/js/**/*.js',
-          tasks: ['jshint:scripts', 'concat']
+          tasks: ['jshint:scripts', 'concat', 'babel']
         }
       }
 
@@ -189,6 +207,7 @@ module.exports = function (grunt) {
     grunt.registerTask('serve', [
       'jshint',
       'concat',
+      'babel',
       'sass',
       'postcss:serve',
       'watch'
@@ -197,12 +216,13 @@ module.exports = function (grunt) {
     // Build
     grunt.registerTask('build', [
       'jshint',
-      'jsdoc',
       'concat',
+      'babel',
       'uglify',
       'sass',
       'postcss:dist'
     ]);
+
 
     // Docs
     grunt.registerTask('docs', [
