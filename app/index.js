@@ -294,7 +294,7 @@ Generator.prototype.end = function(){
       if (directory.isDirectory()) {
         this.log('Copying Foundation\'s _settings.scss to \'' + assets + '/scss/\' ...');
 
-        fs.createReadStream(assets + '/vendor/foundation/scss/foundation/_settings.scss')
+        fs.createReadStream(assets + '/vendor/foundation-sites/scss/settings/_settings.scss')
           .pipe(fs.createWriteStream(assets + '/scss/_settings.scss'));
       }
     }
