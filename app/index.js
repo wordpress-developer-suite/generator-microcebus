@@ -57,23 +57,6 @@ Generator.prototype.prompting = function(){
     name: 'themeDesc',
     message: 'Theme Description',
     default: 'A Custom WordPress theme created for ' + helpers.capitalize(this.appname)
-  },
-  {
-    type: 'input',
-    name: 'dbName',
-    message: 'Database Name',
-    default: 'wp_' + this.appname
-  },
-  {
-    type: 'input',
-    name: 'dbUser',
-    message: 'Database User',
-    store   : true
-  },
-  {
-    type: 'password',
-    name: 'dbPass',
-    message: 'Database Password'
   }];
 
   this.prompt(prompts, function(props){
@@ -98,18 +81,9 @@ Generator.prototype.configuring = function(){
 };
 
 Generator.prototype.getWordPress = function(){
-
+  var done     = this.async();
   var themeURI = this.props.themeURI;
   var themeDir = './wp-content/themes/' + this.props.themeSlug;
-
-  var config = {
-    dbname: this.props.dbName,
-    dbuser: this.props.dbUser
-  };
-
-  if (this.props.dbPass && this.props.dbPass.length > 0) {
-    config.dbpass = this.props.dbPass;
-  }
 
   var downloadTheme = (function(){
     this.log('Cloning theme from ' + themeURI + ' ...');
@@ -180,44 +154,49 @@ Generator.prototype.getWordPress = function(){
     }).bind(this));
   }).bind(this);
 
+  var configureWordPress = (function(){
+      this.log('Making our custom theme the default theme...');
+
+      fs.createReadStream('./wp-config-sample.php').pipe(fs.createWriteStream('./wp-config.php'));
+
+      var endOfConfig  = /\$table_prefix = \'wp_\'\;/;
+      var defaultTheme = 'define( \'WP_DEFAULT_THEME\', \'' + this.props.themeSlug + '\' );';
+
+      replace({
+        regex: endOfConfig,
+        replacement: '$table_prefix = \'wp_\';\n' + defaultTheme,
+        paths: ['./wp-config.php'],
+        recursive: false,
+        silent: true,
+      });
+  }).bind(this);
+
   wp.discover((function(wp){
     wp.cli.info((function(err, info){
       if (err){
         this.log('WP CLI is not installed or configured properly!');
         this.log('Please install: http://wp-cli.org/#install');
+        done(err);
       }
     }).bind(this));
 
     wp.core.download((function(err, result){
+      if (err){
+        done(err);
+      }
+
       this.log(result);
+
+      configureWordPress();
 
       downloadTheme();
 
-      wp.core.config(
-        config,
-      (function(err, result){
-        if (err){
-          this.log(err);
-        }
-        this.log(result);
-        this.log('Making our custom theme the default theme...');
-
-        var endOfConfig  = /\$table_prefix = \'wp_\'\;/;
-        var defaultTheme = 'define( \'WP_DEFAULT_THEME\', \'' + this.props.themeSlug + '\' );';
-
-        replace({
-          regex: endOfConfig,
-          replacement: '$table_prefix = \'wp_\';\n' + defaultTheme,
-          paths: ['./wp-config.php'],
-          recursive: false,
-          silent: true,
-        });
-
-      }).bind(this));
+      done();
 
     }).bind(this));
 
   }).bind(this));
+
 };
 
 Generator.prototype.writing = {
@@ -302,6 +281,8 @@ Generator.prototype.end = function(){
       this.log(e);
     }
   }).bind(this);
+
   settings();
+
   this.log('Done! Happy coding!');
 };
