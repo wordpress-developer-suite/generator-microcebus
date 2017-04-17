@@ -1,6 +1,6 @@
 {
   "name": "generator-microcebus",
-  "version": "0.2.3",
+  "version": "0.2.2",
   "description": "Yeoman generator for opinionated WordPress app",
   "homepage": "https://github.com/micjamking/generator-microcebus",
   "main": "app/index.js",
