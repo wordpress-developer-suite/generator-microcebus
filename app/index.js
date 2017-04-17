@@ -157,10 +157,7 @@ Generator.prototype.getWordPress = function(){
   var configureWordPress = (function(){
       this.log('Making our custom theme the default theme...');
 
-      this.fs.move(
-        './wp-config-sample.php',
-        this.destinationPath('wp-config.php')
-      );
+      fs.createReadStream('./wp-config-sample.php').pipe(fs.createWriteStream('./wp-config.php'));
 
       var endOfConfig  = /\$table_prefix = \'wp_\'\;/;
       var defaultTheme = 'define( \'WP_DEFAULT_THEME\', \'' + this.props.themeSlug + '\' );';
